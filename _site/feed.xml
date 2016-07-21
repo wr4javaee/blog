@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>wr4javaee</title>
+    <description>羽毛的博客</description>
+    <link>https://wr4javaee.github.io/blog/</link>
+    <atom:link href="https://wr4javaee.github.io/blog/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Thu, 21 Jul 2016 00:12:14 -0700</pubDate>
+    <lastBuildDate>Thu, 21 Jul 2016 00:12:14 -0700</lastBuildDate>
+    <generator>Jekyll v3.1.3</generator>
+    
+      <item>
+        <title>TCP长连接与短连接的区别</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#tcp&quot; id=&quot;markdown-toc-tcp&quot;&gt;TCP连接&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#tcp-1&quot; id=&quot;markdown-toc-tcp-1&quot;&gt;TCP短连接&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#tcp-2&quot; id=&quot;markdown-toc-tcp-2&quot;&gt;TCP长连接&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;tcp&quot;&gt;TCP连接&lt;/h2&gt;
+
+&lt;p&gt;当网络通信时采用TCP协议时，在真正的读写操作之前，server与client之间必须建立一个连接，当读写操作完成后，双方不再需要这个连接时它们可以释放这个连接，连接的建立是需要三次握手的，而释放则需要4次握手，所以说每个连接的建立都是需要资源消耗和时间消耗的。&lt;/p&gt;
+
+&lt;p&gt;经典的三次握手示意图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://wr4javaee.github.io/blog/images/networking_protocol/tcp/2016_07_03_01.jpg&quot; alt=&quot;tcp_connection&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;经典的四次握手关闭图：
+&lt;img src=&quot;https://wr4javaee.github.io/blog/images/networking_protocol/tcp/2016_07_03_02.jpg&quot; alt=&quot;tcp_connection&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;tcp-1&quot;&gt;TCP短连接&lt;/h2&gt;
+&lt;p&gt;我们模拟一下TCP短连接的情况，client向server发起连接请求，server接到请求，然后双方建立连接。client向server发送消息，server回应client，然后一次读写就完成了，这时候双方任何一个都可以发起close操作，不过一般都是client先发起close操作。为什么呢，一般的server不会回复完client后立即关闭连接的，当然不排除有特殊的情况。从上面的描述看，短连接一般只会在client/server间传递一次读写操作&lt;/p&gt;
+
+&lt;p&gt;短连接的优点是：管理起来比较简单，存在的连接都是有用的连接，不需要额外的控制手段&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;tcp-2&quot;&gt;TCP长连接&lt;/h2&gt;
+
+&lt;p&gt;接下来我们再模拟一下长连接的情况，client向server发起连接，server接受client连接，双方建立连接。Client与server完成一次读写之后，它们之间的连接并不会主动关闭，后续的读写操作会继续使用这个连接。&lt;/p&gt;
+
+&lt;p&gt;首先说一下TCP/IP详解上讲到的TCP保活功能，保活功能主要为服务器应用提供，服务器应用希望知道客户主机是否崩溃，从而可以代表客户使用资源。如果客户已经消失，使得服务器上保留一个半开放的连接，而服务器又在等待来自客户端的数据，则服务器将应远等待客户端的数据，保活功能就是试图在服务器端检测到这种半开放的连接。&lt;/p&gt;
+
+&lt;p&gt;如果一个给定的连接在两小时内没有任何的动作，则服务器就向客户发一个探测报文段，客户主机必须处于以下4个状态之一：
+* 客户主机依然正常运行，并从服务器可达。客户的TCP响应正常，而服务器也知道对方是正常的，服务器在两小时后将保活定时器复位。
+* 客户主机已经崩溃，并且关闭或者正在重新启动。在任何一种情况下，客户的TCP都没有响应。服务端将不能收到对探测的响应，并在75秒后超时。服务器总共发送10个这样的探测 ，每个间隔75秒。如果服务器没有收到一个响应，它就认为客户主机已经关闭并终止连接。
+* 客户主机崩溃并已经重新启动。服务器将收到一个对其保活探测的响应，这个响应是一个复位，使得服务器终止这个连接。
+* 客户机正常运行，但是服务器不可达，这种情况与2类似，TCP能发现的就是没有收到探查的响应。
+* 
+  从上面可以看出，TCP保活功能主要为探测长连接的存活状况，不过这里存在一个问题，存活功能的探测周期太长，还有就是它只是探测TCP连接的存活，属于比较斯文的做法，遇到恶意的连接时，保活功能就不够使了。&lt;/p&gt;
+
+&lt;p&gt;在长连接的应用场景下，client端一般不会主动关闭它们之间的连接，Client与server之间的连接如果一直不关闭的话，会存在一个问题，随着客户端连接越来越多，server早晚有扛不住的时候，这时候server端需要采取一些策略，如关闭一些长时间没有读写事件发生的连接，这样可以避免一些恶意连接导致server端服务受损；如果条件再允许就可以以客户端机器为颗粒度，限制每个客户端的最大长连接数，这样可以完全避免某个蛋疼的客户端连累后端服务。&lt;/p&gt;
+
+&lt;p&gt;长连接和短连接的产生在于client和server采取的关闭策略，具体的应用场景采用具体的策略，没有十全十美的选择，只有合适的选择。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;本文转自http://www.cnblogs.com/beifei/archive/2011/06/26/2090611.html&lt;/p&gt;
+
+&lt;hr /&gt;
+</description>
+        <pubDate>Sun, 03 Jul 2016 00:00:00 -0700</pubDate>
+        <link>https://wr4javaee.github.io/blog/2016/07/03/tcp-connection/</link>
+        <guid isPermaLink="true">https://wr4javaee.github.io/blog/2016/07/03/tcp-connection/</guid>
+        
+        <category>TCP</category>
+        
+        <category>Connection</category>
+        
+        <category>TCP连接</category>
+        
+        
+        <category>TCP</category>
+        
+      </item>
+    
+      <item>
+        <title>Zookeeper学习笔记二</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;基本概念&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;集群角色&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#session&quot; id=&quot;markdown-toc-session&quot;&gt;会话（Session）&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#znode&quot; id=&quot;markdown-toc-znode&quot;&gt;数据节点（Znode）&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;版本&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#watcher&quot; id=&quot;markdown-toc-watcher&quot;&gt;事件监听器（Watcher）&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#aclaccess-control-lists&quot; id=&quot;markdown-toc-aclaccess-control-lists&quot;&gt;ACL（Access Control Lists）&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#zab&quot; id=&quot;markdown-toc-zab&quot;&gt;ZAB协议&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#zab-1&quot; id=&quot;markdown-toc-zab-1&quot;&gt;ZAB协议两种基本模式&lt;/a&gt;            &lt;ul&gt;
+              &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;基本特性&lt;/a&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;a href=&quot;#leader&quot; id=&quot;markdown-toc-leader&quot;&gt;Leader选举&lt;/a&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;a href=&quot;#section-4&quot; id=&quot;markdown-toc-section-4&quot;&gt;数据同步&lt;/a&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;a href=&quot;#section-5&quot; id=&quot;markdown-toc-section-5&quot;&gt;消息广播&lt;/a&gt;                &lt;ul&gt;
+                  &lt;li&gt;&lt;a href=&quot;#zab-2&quot; id=&quot;markdown-toc-zab-2&quot;&gt;ZAB协议核心&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;section&quot;&gt;基本概念&lt;/h1&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;集群角色&lt;/h3&gt;
+
+&lt;p&gt;ZooKeeper没有沿用传统集群模式（主备模式，Master/Slave），而是采用了Leader、Follower、Observer三种角色。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Leader 选举而来，为client提供读/写服务。&lt;/li&gt;
+  &lt;li&gt;Follower 为client提供读服务，可参与选举。&lt;/li&gt;
+  &lt;li&gt;Observer 为client提供读服务，不参与Leader选举，不参与写操作的“过半写成功”策略，通常用于提升集群读性能。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;session&quot;&gt;会话（Session）&lt;/h3&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;znode&quot;&gt;数据节点（Znode）&lt;/h3&gt;
+
+&lt;p&gt;指数据模型（Znode Tree）中的数据单元&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;版本&lt;/h3&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;watcher&quot;&gt;事件监听器（Watcher）&lt;/h3&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;aclaccess-control-lists&quot;&gt;ACL（Access Control Lists）&lt;/h3&gt;
+
+&lt;p&gt;ZooKeeper定义了5种权限：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;CREATE 创建子节点的权限&lt;/li&gt;
+  &lt;li&gt;READ 获取节点数据和节点列表的权限&lt;/li&gt;
+  &lt;li&gt;WRITE 更新节点数据的权限&lt;/li&gt;
+  &lt;li&gt;DELETE 删除子节点的权限&lt;/li&gt;
+  &lt;li&gt;ADMIN 设置节点ACL的权限&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;zab&quot;&gt;ZAB协议&lt;/h2&gt;
+
+&lt;p&gt;ZooKeeper原子消息广播协议（Zookeeper Atomic Broadcast）。
+ZooKeeper并未采用Paxos，而是采用ZAB作为数据一致性的核心算法。&lt;/p&gt;
+
+&lt;h3 id=&quot;zab-1&quot;&gt;ZAB协议两种基本模式&lt;/h3&gt;
+&lt;p&gt;#### 崩溃恢复
+  服务器启动、Leader服务器挂掉时进入该模式，选举产生新Leader服务器。
+  当集群中有过半服务器（包含Leader）与Leader服务器完成状态同步（即数据同步）后，退出该模式。&lt;/p&gt;
+
+&lt;h5 id=&quot;section-3&quot;&gt;基本特性&lt;/h5&gt;
+&lt;ul&gt;
+  &lt;li&gt;ZAB协议需要确保已在Leader提交的事务最终被所有服务器提交。&lt;/li&gt;
+  &lt;li&gt;ZAB协议需要确保丢弃那些只在Leader服务器上被提出的事务。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;leader&quot;&gt;Leader选举&lt;/h5&gt;
+&lt;p&gt;算法思路：确保已被Leader提交的事务Proposal，同时丢弃已被掉过的事务Proposal。
+即保证选举出的Leader服务器拥有集群中ZXID最大的事务Proposal。&lt;/p&gt;
+
+&lt;h5 id=&quot;section-4&quot;&gt;数据同步&lt;/h5&gt;
+&lt;p&gt;Leader服务器通过确认事务日志中所有Proposal是否已被集群中过半的服务器提交，来判断是否完成数据同步。&lt;/p&gt;
+
+&lt;h4 id=&quot;section-5&quot;&gt;消息广播&lt;/h4&gt;
+
+&lt;h5 id=&quot;zab-2&quot;&gt;ZAB协议核心&lt;/h5&gt;
+&lt;p&gt;定义了可能改变ZooKeeper服务器数据状态的数据请求处理方式：
+&lt;img src=&quot;https://wr4javaee.github.io/blog/images/zookeeper/zab/2016_07_18_zab_message_broadcast.png&quot; alt=&quot;zab_message_broadcast&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Leader服务器收到事务请求后，生成事务Proposal，并为其分配事务ID（全局单调递增的ID，ZXID），放入队列中。&lt;/li&gt;
+  &lt;li&gt;Follower服务器接收到Proposal后，以事务日志形式写入到本地磁盘，写入成功后Respone Leader服务器“Ack”。&lt;/li&gt;
+  &lt;li&gt;当Leader服务器接收超过半数Follower服务器Ack响应，广播Commit消息发送给所有Follower服务器，Leader自身与收到Commit消息的Follower服务器会完成事务提交。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;基于TCP协议（FIFO）保证消息接收与发送的顺序性。&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 17 Jun 2016 00:00:00 -0700</pubDate>
+        <link>https://wr4javaee.github.io/blog/2016/06/17/zookeeper-02/</link>
+        <guid isPermaLink="true">https://wr4javaee.github.io/blog/2016/06/17/zookeeper-02/</guid>
+        
+        <category>Zookeeper</category>
+        
+        <category>ZAB</category>
+        
+        
+        <category>Zookeeper</category>
+        
+      </item>
+    
+      <item>
+        <title>Zookeeper学习笔记一之Paxos算法</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;背景&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;算法描述&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;1990年提出的一种基于消息传递且具有高度容错性的一致性算法。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;算法描述&lt;/h2&gt;
+
+&lt;p&gt;假设有一组可以提出提案的进程集合，对于一个一致性算法来说需保证：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;提案只有一个会被选定&lt;/li&gt;
+  &lt;li&gt;若没有提案提出，则没有被选定的提案&lt;/li&gt;
+  &lt;li&gt;提案若被选定，进程可以获取提案信息&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;分布式系统的【三态】：成功、失败、超时。&lt;/p&gt;
+</description>
+        <pubDate>Fri, 17 Jun 2016 00:00:00 -0700</pubDate>
+        <link>https://wr4javaee.github.io/blog/2016/06/17/zookeeper-01/</link>
+        <guid isPermaLink="true">https://wr4javaee.github.io/blog/2016/06/17/zookeeper-01/</guid>
+        
+        <category>Zookeeper</category>
+        
+        <category>Paxos</category>
+        
+        
+        <category>Zookeeper</category>
+        
+      </item>
+    
+      <item>
+        <title>数据库学习笔记 - 数据库保护</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#transaction&quot; id=&quot;markdown-toc-transaction&quot;&gt;什么是事务（Transaction）&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#acid&quot; id=&quot;markdown-toc-acid&quot;&gt;事务的特性（ACID）&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;并发控制&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#lost-update&quot; id=&quot;markdown-toc-lost-update&quot;&gt;丢失更新（Lost Update）&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#dirty-reads&quot; id=&quot;markdown-toc-dirty-reads&quot;&gt;脏读（Dirty Reads）&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#non-repeatable-reads&quot; id=&quot;markdown-toc-non-repeatable-reads&quot;&gt;不可重复读（Non-repeatable Reads）&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#phantom-reads&quot; id=&quot;markdown-toc-phantom-reads&quot;&gt;幻读（Phantom Reads）&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;事务的隔离级别&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#read-uncommitted&quot; id=&quot;markdown-toc-read-uncommitted&quot;&gt;未授权读取（Read Uncommitted）&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#read-committed&quot; id=&quot;markdown-toc-read-committed&quot;&gt;授权读取（Read Committed）&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#repeatable-read&quot; id=&quot;markdown-toc-repeatable-read&quot;&gt;可重复读（Repeatable Read）&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#serializable&quot; id=&quot;markdown-toc-serializable&quot;&gt;串行化（Serializable）&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;分布式事务&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#cap&quot; id=&quot;markdown-toc-cap&quot;&gt;CAP定理&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#base&quot; id=&quot;markdown-toc-base&quot;&gt;BASE理论&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;一致性协议&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#pctwo-phase-commit&quot; id=&quot;markdown-toc-pctwo-phase-commit&quot;&gt;2PC二阶段提交协议（Two-Phase Commit）&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#pc&quot; id=&quot;markdown-toc-pc&quot;&gt;3PC&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-4&quot; id=&quot;markdown-toc-section-4&quot;&gt;锁&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#pessimistic-concurrency-control-pcc&quot; id=&quot;markdown-toc-pessimistic-concurrency-control-pcc&quot;&gt;悲观锁（Pessimistic Concurrency Control， PCC）&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#optimistic-concurrency-control-occ&quot; id=&quot;markdown-toc-optimistic-concurrency-control-occ&quot;&gt;乐观锁 （Optimistic Concurrency Control， OCC）&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;transaction&quot;&gt;什么是事务（Transaction）&lt;/h2&gt;
+
+&lt;p&gt;事务是用户定义的数据操作系列，这些操作可作为一个完整的工作单元（数据库的逻辑工作单位）。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;acid&quot;&gt;事务的特性（ACID）&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;原子性（Atomicity）事务中的操作要么都做，要么都不做。&lt;/li&gt;
+  &lt;li&gt;一致性（Consistency）只有合法的数据可以被写入数据库，否则事务应该将其回滚到最初状态。&lt;/li&gt;
+  &lt;li&gt;隔离性（Isolation）数据库中一个事务的执行不能被其他事务干扰。&lt;/li&gt;
+  &lt;li&gt;持久性（Durability）事务一旦提交，其对数据库中数据的改变就是永久的。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;并发控制&lt;/h2&gt;
+
+&lt;p&gt;并发问题导致的异常情况归类如下：&lt;/p&gt;
+
+&lt;h4 id=&quot;lost-update&quot;&gt;丢失更新（Lost Update）&lt;/h4&gt;
+
+&lt;p&gt;两个事务都同时更新一行数据，第一个事务的提交结果被第二个事务的提交结果破坏。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://wr4javaee.github.io/blog/images/db/transaction/2016_05_26_lost_update.png&quot; alt=&quot;lost_update&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;dirty-reads&quot;&gt;脏读（Dirty Reads）&lt;/h4&gt;
+
+&lt;p&gt;一个事务读了某个失败事务运行过程中的数据。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://wr4javaee.github.io/blog/images/db/transaction/2016_05_26_dirty_reads.png&quot; alt=&quot;ldirty_reads&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;non-repeatable-reads&quot;&gt;不可重复读（Non-repeatable Reads）&lt;/h4&gt;
+
+&lt;p&gt;一个事务对同一行数据重复读取两次，但是却得到了不同的结果。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://wr4javaee.github.io/blog/images/db/transaction/2016_05_26_non_repeatable_reads.png&quot; alt=&quot;non_repeatable_reads&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;phantom-reads&quot;&gt;幻读（Phantom Reads）&lt;/h4&gt;
+
+&lt;p&gt;幻读实际属于不可重复读的范畴。它指当事务T1按照一定条件读取某些数据，事务T2对其中部分记录做了删除或更新操作，当事务T1再次以相同条件读取数据时，发现少或多了某些记录。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;事务的隔离级别&lt;/h2&gt;
+
+&lt;h4 id=&quot;read-uncommitted&quot;&gt;未授权读取（Read Uncommitted）&lt;/h4&gt;
+&lt;p&gt;也称读未提交，隔离级别最低，允许脏读。&lt;/p&gt;
+
+&lt;h4 id=&quot;read-committed&quot;&gt;授权读取（Read Committed）&lt;/h4&gt;
+&lt;p&gt;也称读已提交，允许不可重复读。&lt;/p&gt;
+
+&lt;h4 id=&quot;repeatable-read&quot;&gt;可重复读（Repeatable Read）&lt;/h4&gt;
+&lt;p&gt;允许出现幻读。&lt;/p&gt;
+
+&lt;h4 id=&quot;serializable&quot;&gt;串行化（Serializable）&lt;/h4&gt;
+&lt;p&gt;最严格的事务隔离级别，要求所有事务都被串行执行。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://wr4javaee.github.io/blog/images/db/transaction/2016_05_26_transaction_isolation_level.png&quot; alt=&quot;transaction_isolation_level&quot; /&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;隔离级别&lt;/th&gt;
+      &lt;th&gt;脏读&lt;/th&gt;
+      &lt;th&gt;可重复读&lt;/th&gt;
+      &lt;th&gt;幻读&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;未授权读取&lt;/td&gt;
+      &lt;td&gt;存在&lt;/td&gt;
+      &lt;td&gt;不可以&lt;/td&gt;
+      &lt;td&gt;存在&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;授权读取&lt;/td&gt;
+      &lt;td&gt;不存在&lt;/td&gt;
+      &lt;td&gt;不可以&lt;/td&gt;
+      &lt;td&gt;存在&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;可重复读取&lt;/td&gt;
+      &lt;td&gt;不存在&lt;/td&gt;
+      &lt;td&gt;可以&lt;/td&gt;
+      &lt;td&gt;存在&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;串行化&lt;/td&gt;
+      &lt;td&gt;不存在&lt;/td&gt;
+      &lt;td&gt;可以&lt;/td&gt;
+      &lt;td&gt;不存在&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h1 id=&quot;section-2&quot;&gt;分布式事务&lt;/h1&gt;
+
+&lt;h2 id=&quot;cap&quot;&gt;CAP定理&lt;/h2&gt;
+&lt;p&gt;一个分布式系统不可能同时满足一致性（Consistency）、可用性（Availability）、分区容错性（Partition tolerance），最多只能同时满足其中两项。&lt;/p&gt;
+
+&lt;h2 id=&quot;base&quot;&gt;BASE理论&lt;/h2&gt;
+
+&lt;h1 id=&quot;section-3&quot;&gt;一致性协议&lt;/h1&gt;
+
+&lt;p&gt;协调者：统一调度所有分布式节点执行逻辑组件。
+参与者：被协调者调度的分布式节点。&lt;/p&gt;
+
+&lt;h2 id=&quot;pctwo-phase-commit&quot;&gt;2PC二阶段提交协议（Two-Phase Commit）&lt;/h2&gt;
+
+&lt;h2 id=&quot;pc&quot;&gt;3PC&lt;/h2&gt;
+
+&lt;h1 id=&quot;section-4&quot;&gt;锁&lt;/h1&gt;
+
+&lt;h2 id=&quot;pessimistic-concurrency-control-pcc&quot;&gt;悲观锁（Pessimistic Concurrency Control， PCC）&lt;/h2&gt;
+&lt;p&gt;又称排他锁，若事务T1使用悲观锁对数据进行处理，则处理完成前，其他事务均不能对数据进行更新操作。&lt;/p&gt;
+
+&lt;h2 id=&quot;optimistic-concurrency-control-occ&quot;&gt;乐观锁 （Optimistic Concurrency Control， OCC）&lt;/h2&gt;
+&lt;p&gt;乐观锁事务控制分为三阶段，分别是：数据读取、写入校验、数据写入。&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 25 May 2016 00:00:00 -0700</pubDate>
+        <link>https://wr4javaee.github.io/blog/2016/05/25/db_trans/</link>
+        <guid isPermaLink="true">https://wr4javaee.github.io/blog/2016/05/25/db_trans/</guid>
+        
+        <category>数据库</category>
+        
+        <category>事务</category>
+        
+        <category>transaction</category>
+        
+        <category>acid</category>
+        
+        <category>lock</category>
+        
+        
+        <category>Database</category>
+        
+      </item>
+    
+      <item>
+        <title>使用Jekyll在github上搭建博客</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;写在前面&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;关于博客模板&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;搭建过程中遇到的问题&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;写在前面&lt;/h2&gt;
+&lt;blockquote&gt;
+
+  &lt;p&gt;&lt;a href=&quot;http://jekyll.bootcss.com/&quot;&gt;Jekyll官方网站&lt;/a&gt;，内容很详细&lt;/p&gt;
+
+  &lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html&quot;&gt;作者阮一峰关于Jekyll与Github Blog的入门教程&lt;/a&gt;，推荐大家阅读&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;关于博客模板&lt;/h2&gt;
+&lt;p&gt;网络上免费的Jekyll主题非常多，推荐2个主题网站&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;p&gt;&lt;a href=&quot;http://jekyllthemes.org/&quot;&gt;Jekyll主题网站一&lt;/a&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;a href=&quot;http://jekyllthemes.io/&quot;&gt;Jekyll主题网站二&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;另外，本网站使用的主题来源&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;http://gaohaoyang.github.io&quot;&gt;Gaohaoyang&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;搭建过程中遇到的问题&lt;/h2&gt;
+&lt;p&gt;由于Jekyll依赖于Ruby，在安装Ruby环境过程中由于众所周知的原因，总是遇到网络连接错误。
+好在淘宝提供了RubyGems镜像服务，它与官方服务同步频率为15分钟。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;https://ruby.taobao.org/&quot;&gt;淘宝网RubyGems镜像说明&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;以下为说明中提到的大致流程&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ gem sources --add https://ruby.taobao.org/ --remove https://rubygems.org/
+$ gem sources -l
+*** CURRENT SOURCES ***
+
+https://ruby.taobao.org
+# 请确保只有 ruby.taobao.org
+$ gem install rails
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+</description>
+        <pubDate>Sun, 22 May 2016 00:00:00 -0700</pubDate>
+        <link>https://wr4javaee.github.io/blog/2016/05/22/blog_start/</link>
+        <guid isPermaLink="true">https://wr4javaee.github.io/blog/2016/05/22/blog_start/</guid>
+        
+        <category>Jekyll</category>
+        
+        <category>Github</category>
+        
+        <category>搭建静态博客</category>
+        
+        <category>blog</category>
+        
+        
+        <category>Jekyll</category>
+        
+      </item>
+    
+  </channel>
+</rss>
