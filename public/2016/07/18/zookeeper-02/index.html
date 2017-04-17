@@ -70,15 +70,15 @@ Observer 为client提供读服务，不参与Leader选举，不参与写操作�
 <script>
 var themeMenus = {};
 
-  themeMenus["/blog/blog"] = "Home"; 
+  themeMenus["/blog/blog"] = "首页"; 
 
-  themeMenus["/blog/archives"] = "Archives"; 
+  themeMenus["/blog/archives"] = "归档"; 
 
-  themeMenus["/blog/categories"] = "Kategorien"; 
+  themeMenus["/blog/categories"] = "分类"; 
 
-  themeMenus["/blog/tags"] = "Tags"; 
+  themeMenus["/blog/tags"] = "标签"; 
 
-  themeMenus["/blog/about"] = "About"; 
+  themeMenus["/blog/about"] = "关于"; 
 
 </script>
 
@@ -107,15 +107,15 @@ var themeMenus = {};
 
               <ul id="main-nav" class="nmenu sf-js-enabled">
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/blog">Home</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/blog">首页</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/archives">Archives</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/archives">归档</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/categories">Kategorien</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/categories">分类</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/tags">Tags</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/tags">标签</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/about">About</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/about">关于</a> </li>
                     
               </ul>
             </div>
@@ -151,7 +151,7 @@ var themeMenus = {};
     <div class="article-meta">
       
 	Posted on <a href="/blog/2016/07/18/zookeeper-02/" class="article-date">
-	  <time datetime="2016-07-18T07:00:00.000Z" itemprop="datePublished">July 18, 2016</time>
+	  <time datetime="2016-07-18T07:00:00.000Z" itemprop="datePublished">七月 18, 2016</time>
 	</a>
 
       
@@ -244,7 +244,7 @@ var themeMenus = {};
 <nav id="article-nav">
   
     <a href="/blog/2016/07/23/zookeeper_deploy_and_client_using/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Neuer</strong>
+      <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
           Zookeeper的安装部署与客户端使用
@@ -254,7 +254,7 @@ var themeMenus = {};
   
   
     <a href="/blog/2016/07/10/zookeeper-01/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Älter</strong>
+      <strong class="article-nav-caption">下一篇</strong>
       <div class="article-nav-title">Zookeeper学习笔记一之Paxos算法</div>
     </a>
   
@@ -267,12 +267,13 @@ var themeMenus = {};
 
   <aside id="sidebar">
     <div id="toc" class="toc-article">
-    <strong class="toc-title">Contents</strong>
+    <strong class="toc-title">文章目录</strong>
     
       <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本概念"><span class="nav-number">1.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#集群角色"><span class="nav-number">1.0.1.</span> <span class="nav-text">集群角色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会话（Session）"><span class="nav-number">1.0.2.</span> <span class="nav-text">会话（Session）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据节点（Znode）"><span class="nav-number">1.0.3.</span> <span class="nav-text">数据节点（Znode）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#版本"><span class="nav-number">1.0.4.</span> <span class="nav-text">版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件监听器（Watcher）"><span class="nav-number">1.0.5.</span> <span class="nav-text">事件监听器（Watcher）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ACL（Access-Control-Lists）"><span class="nav-number">1.0.6.</span> <span class="nav-text">ACL（Access Control Lists）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ZAB协议"><span class="nav-number">1.1.</span> <span class="nav-text">ZAB协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ZAB协议两种基本模式"><span class="nav-number">1.1.1.</span> <span class="nav-text">ZAB协议两种基本模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#崩溃恢复"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">崩溃恢复</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#基本特性"><span class="nav-number">1.1.1.1.1.</span> <span class="nav-text">基本特性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Leader选举"><span class="nav-number">1.1.1.1.2.</span> <span class="nav-text">Leader选举</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数据同步"><span class="nav-number">1.1.1.1.3.</span> <span class="nav-text">数据同步</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#消息广播"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">消息广播</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ZAB协议核心"><span class="nav-number">1.1.1.2.1.</span> <span class="nav-text">ZAB协议核心</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
     
     </div>
   </aside>
+
 </section>
         
       </div>

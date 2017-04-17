@@ -3,10 +3,8 @@
 <head>
   <meta charset="utf-8">
   
-  <title>zookeeper学习笔记一之paxos算法 | 羽毛的博客 STAY REAL!</title>
+  <title>test.md | 羽毛的博客 STAY REAL!</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  
-  <meta name="keywords" content="Zookeeper Paxos" />
   
   
     <meta name="google-site-verification" content="wr4javaee" />
@@ -15,16 +13,16 @@
     <meta name="baidu-site-verification" content="wr4javaee" />
   
   
-  <meta name="description" content="背景1990年提出的一种基于消息传递且具有高度容错性的一致性算法。">
+  <meta name="description" content="这一生只愿只要平凡快乐 谁说这样不伟大呢">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Zookeeper学习笔记一之Paxos算法">
-<meta property="og:url" content="http://wangran.me/blog/2016/07/10/zookeeper-01/index.html">
+<meta property="og:title" content="test.md">
+<meta property="og:url" content="http://wangran.me/blog/2017/04/14/test-md/index.html">
 <meta property="og:site_name" content="羽毛的博客 STAY REAL!">
-<meta property="og:description" content="背景1990年提出的一种基于消息传递且具有高度容错性的一致性算法。">
-<meta property="og:updated_time" content="2016-07-23T01:14:12.865Z">
+<meta property="og:description" content="这一生只愿只要平凡快乐 谁说这样不伟大呢">
+<meta property="og:updated_time" content="2017-04-14T11:17:20.784Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zookeeper学习笔记一之Paxos算法">
-<meta name="twitter:description" content="背景1990年提出的一种基于消息传递且具有高度容错性的一致性算法。">
+<meta name="twitter:title" content="test.md">
+<meta name="twitter:description" content="这一生只愿只要平凡快乐 谁说这样不伟大呢">
   
     <link rel="alternate" href="/atom.xml" title="羽毛的博客 STAY REAL!" type="application/atom+xml">
   
@@ -56,15 +54,15 @@
 <script>
 var themeMenus = {};
 
-  themeMenus["/blog/blog"] = "首页"; 
+  themeMenus["/blog/"] = "Home"; 
 
-  themeMenus["/blog/archives"] = "归档"; 
+  themeMenus["/blog/archives"] = "Archives"; 
 
-  themeMenus["/blog/categories"] = "分类"; 
+  themeMenus["/blog/categories"] = "Kategorien"; 
 
-  themeMenus["/blog/tags"] = "标签"; 
+  themeMenus["/blog/tags"] = "Tags"; 
 
-  themeMenus["/blog/about"] = "关于"; 
+  themeMenus["/blog/about"] = "About"; 
 
 </script>
 
@@ -93,15 +91,15 @@ var themeMenus = {};
 
               <ul id="main-nav" class="nmenu sf-js-enabled">
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/blog">首页</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/">Home</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/archives">归档</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/archives">Archives</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/categories">分类</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/categories">Kategorien</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/tags">标签</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/tags">Tags</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/about">关于</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/about">About</a> </li>
                     
               </ul>
             </div>
@@ -120,7 +118,7 @@ var themeMenus = {};
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-zookeeper-01" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-test-md" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -128,7 +126,7 @@ var themeMenus = {};
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      Zookeeper学习笔记一之Paxos算法
+      test.md
     </h1>
   
 
@@ -136,8 +134,8 @@ var themeMenus = {};
     
     <div class="article-meta">
       
-	Posted on <a href="/blog/2016/07/10/zookeeper-01/" class="article-date">
-	  <time datetime="2016-07-10T07:00:00.000Z" itemprop="datePublished">七月 10, 2016</time>
+	Posted on <a href="/blog/2017/04/14/test-md/" class="article-date">
+	  <time datetime="2017-04-14T11:17:20.000Z" itemprop="datePublished">April 14, 2017</time>
 	</a>
 
       
@@ -148,32 +146,18 @@ var themeMenus = {};
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>1990年提出的一种基于消息传递且具有高度容错性的一致性算法。<br><a id="more"></a></p>
-<h2 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h2><p>假设有一组可以提出提案的进程集合，对于一个一致性算法来说需保证：</p>
-<ul>
-<li>提案只有一个会被选定</li>
-<li>若没有提案提出，则没有被选定的提案</li>
-<li>提案若被选定，进程可以获取提案信息</li>
-</ul>
-<p>分布式系统的【三态】：成功、失败、超时。</p>
-
+        
       
     </div>
     <footer class="entry-meta entry-footer">
       
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/blog/categories/Zookeeper/">Zookeeper</a>
-
       
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Zookeeper-Paxos/">Zookeeper Paxos</a></li></ul>
-
       
         
 	<div id="comment">
 	
 	<!-- 多说评论框 start -->
-	 <div class="ds-thread" data-thread-key="/blog/2016/07/10/zookeeper-01/" data-title="Zookeeper学习笔记一之Paxos算法" data-url="http://wangran.me/blog/blog/2016/07/10/zookeeper-01/"></div>
+	 <div class="ds-thread" data-thread-key="/blog/2017/04/14/test-md/" data-title="test.md" data-url="http://wangran.me/blog/blog/2017/04/14/test-md/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -200,19 +184,10 @@ var themeMenus = {};
     
 <nav id="article-nav">
   
-    <a href="/blog/2016/07/18/zookeeper-02/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">
-        
-          Zookeeper学习笔记二
-        
-      </div>
-    </a>
   
-  
-    <a href="/blog/2016/07/03/tcp-connection/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">TCP长连接与短连接的区别</div>
+    <a href="/blog/2016/10/20/github_pages_init/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">基于Github搭建个人博客</div>
     </a>
   
 </nav>
@@ -224,13 +199,12 @@ var themeMenus = {};
 
   <aside id="sidebar">
     <div id="toc" class="toc-article">
-    <strong class="toc-title">文章目录</strong>
+    <strong class="toc-title">Contents</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法描述"><span class="nav-number">2.</span> <span class="nav-text">算法描述</span></a></li></ol>
+      <ol class="nav">None</ol>
     
     </div>
   </aside>
-
 </section>
         
       </div>
@@ -264,7 +238,7 @@ var themeMenus = {};
     </div>
     <!-- <nav id="mobile-nav">
   
-    <a href="/blog/blog" class="mobile-nav-link">Home</a>
+    <a href="/blog/" class="mobile-nav-link">Home</a>
   
     <a href="/blog/archives" class="mobile-nav-link">Archives</a>
   
@@ -363,6 +337,6 @@ ga('send', 'pageview');
   </div>
 
   <a id="rocket" href="#top" class=""></a>
-  <script type="text/javascript" src="/js/totop.js" async=""></script>
+  <script src="/blog/js/totop.js"></script>
 </body>
 </html>

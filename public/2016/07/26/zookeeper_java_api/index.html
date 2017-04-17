@@ -56,15 +56,15 @@
 <script>
 var themeMenus = {};
 
-  themeMenus["/blog/blog"] = "Home"; 
+  themeMenus["/blog/blog"] = "首页"; 
 
-  themeMenus["/blog/archives"] = "Archives"; 
+  themeMenus["/blog/archives"] = "归档"; 
 
-  themeMenus["/blog/categories"] = "Kategorien"; 
+  themeMenus["/blog/categories"] = "分类"; 
 
-  themeMenus["/blog/tags"] = "Tags"; 
+  themeMenus["/blog/tags"] = "标签"; 
 
-  themeMenus["/blog/about"] = "About"; 
+  themeMenus["/blog/about"] = "关于"; 
 
 </script>
 
@@ -93,15 +93,15 @@ var themeMenus = {};
 
               <ul id="main-nav" class="nmenu sf-js-enabled">
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/blog">Home</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/blog">首页</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/archives">Archives</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/archives">归档</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/categories">Kategorien</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/categories">分类</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/tags">Tags</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/tags">标签</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/about">About</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/about">关于</a> </li>
                     
               </ul>
             </div>
@@ -137,7 +137,7 @@ var themeMenus = {};
     <div class="article-meta">
       
 	Posted on <a href="/blog/2016/07/26/zookeeper_java_api/" class="article-date">
-	  <time datetime="2016-07-26T07:00:00.000Z" itemprop="datePublished">July 26, 2016</time>
+	  <time datetime="2016-07-26T07:00:00.000Z" itemprop="datePublished">七月 26, 2016</time>
 	</a>
 
       
@@ -502,7 +502,7 @@ var themeMenus = {};
 <nav id="article-nav">
   
     <a href="/blog/2016/07/27/zookeeper_curator/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Neuer</strong>
+      <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
           Zookeeper Curator的使用
@@ -512,7 +512,7 @@ var themeMenus = {};
   
   
     <a href="/blog/2016/07/23/zookeeper_deploy_and_client_using/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Älter</strong>
+      <strong class="article-nav-caption">下一篇</strong>
       <div class="article-nav-title">Zookeeper的安装部署与客户端使用</div>
     </a>
   
@@ -525,12 +525,13 @@ var themeMenus = {};
 
   <aside id="sidebar">
     <div id="toc" class="toc-article">
-    <strong class="toc-title">Contents</strong>
+    <strong class="toc-title">文章目录</strong>
     
       <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过API建立ZooKeeper-Session"><span class="nav-number">2.</span> <span class="nav-text">通过API建立ZooKeeper Session</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过API创建节点"><span class="nav-number">3.</span> <span class="nav-text">通过API创建节点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#说明"><span class="nav-number">3.1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Case"><span class="nav-number">3.2.</span> <span class="nav-text">Case</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过API读取节点"><span class="nav-number">4.</span> <span class="nav-text">通过API读取节点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#API说明："><span class="nav-number">4.1.</span> <span class="nav-text">API说明：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getChildren查询指定节点的所有子节点"><span class="nav-number">4.2.</span> <span class="nav-text">getChildren查询指定节点的所有子节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getData查询指定节点的数据内容"><span class="nav-number">4.3.</span> <span class="nav-text">getData查询指定节点的数据内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数说明"><span class="nav-number">4.4.</span> <span class="nav-text">参数说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过API更新节点"><span class="nav-number">5.</span> <span class="nav-text">通过API更新节点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#API说明"><span class="nav-number">5.1.</span> <span class="nav-text">API说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数说明-1"><span class="nav-number">5.2.</span> <span class="nav-text">参数说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过API删除节点"><span class="nav-number">6.</span> <span class="nav-text">通过API删除节点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#API说明-1"><span class="nav-number">6.1.</span> <span class="nav-text">API说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过API判断节点是否存在"><span class="nav-number">7.</span> <span class="nav-text">通过API判断节点是否存在</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#API说明-2"><span class="nav-number">7.1.</span> <span class="nav-text">API说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#权限控制"><span class="nav-number">8.</span> <span class="nav-text">权限控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#API说明-3"><span class="nav-number">8.1.</span> <span class="nav-text">API说明</span></a></li></ol></li></ol>
     
     </div>
   </aside>
+
 </section>
         
       </div>
