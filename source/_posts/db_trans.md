@@ -2,7 +2,7 @@
 title:  "数据库学习笔记 - 数据库保护"
 date: 2016-05-22 00:00:00
 categories: Database
-tags: 数据库 事务 transaction acid lock
+tags: 数据库
 toc:
   on: true
   max_depth: 3

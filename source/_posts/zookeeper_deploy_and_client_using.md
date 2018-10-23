@@ -2,7 +2,7 @@
 title:  "Zookeeper的安装部署与客户端使用"
 date: 2016-07-23 00:00:00
 categories: Zookeeper
-tags: Zookeeper zkCli.sh zkServer.sh
+tags: Zookeeper
 toc:
   on: true
   max_depth: 3

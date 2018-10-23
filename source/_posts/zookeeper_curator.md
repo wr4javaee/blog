@@ -2,7 +2,7 @@
 title:  "Zookeeper Curator的使用"
 date: 2016-07-27 00:00:00
 categories: Zookeeper
-tags: Zookeeper Curator
+tags: Zookeeper
 toc:
   on: true
   max_depth: 3

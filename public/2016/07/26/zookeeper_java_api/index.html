@@ -2,153 +2,162 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>zookeeper java api的使用 | 羽毛的博客 STAY REAL!</title>
+  <title>Zookeeper Java API的使用 | wr4javaee</title>
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" href="/">
+  <link rel="alternate" href="/atom.xml" title="wr4javaee">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  
-  <meta name="keywords" content="Zookeeper" />
-  
-  
-    <meta name="google-site-verification" content="wr4javaee" />
-  
-  
-    <meta name="baidu-site-verification" content="wr4javaee" />
-  
-  
-  <meta name="description" content="前言Zookeeper官方API文档 http://zookeeper.apache.org/doc/r3.4.6/api/index.html">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Zookeeper Java API的使用">
-<meta property="og:url" content="http://wangran.me/blog/2016/07/26/zookeeper_java_api/index.html">
-<meta property="og:site_name" content="羽毛的博客 STAY REAL!">
-<meta property="og:description" content="前言Zookeeper官方API文档 http://zookeeper.apache.org/doc/r3.4.6/api/index.html">
-<meta property="og:updated_time" content="2016-07-27T08:28:53.527Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zookeeper Java API的使用">
-<meta name="twitter:description" content="前言Zookeeper官方API文档 http://zookeeper.apache.org/doc/r3.4.6/api/index.html">
-  
-    <link rel="alternate" href="/atom.xml" title="羽毛的博客 STAY REAL!" type="application/atom+xml">
-  
-  <link rel="icon" href="/blog/css/images/favicon.ico">
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
-  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-  <style type="text/css">
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
-    
-  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
-  <link rel="stylesheet" href="/blog/css/style.css">
 
-  <script src="/blog/js/jquery-3.1.1.min.js"></script>
-
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="/blog/css/bootstrap.css" >
-  <link rel="stylesheet" href="/blog/css/hiero.css" >
-  <link rel="stylesheet" href="/blog/css/glyphs.css" >
-
+  <link rel="shortcut icon" href="" />
+  <link rel="icon" href="" />
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href='//cdn.bootcss.com/node-waves/0.7.5/waves.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="/style.css">
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
 </head>
 
-<script>
-var themeMenus = {};
-
-  themeMenus["/blog/blog"] = "首页"; 
-
-  themeMenus["/blog/archives"] = "归档"; 
-
-  themeMenus["/blog/categories"] = "分类"; 
-
-  themeMenus["/blog/tags"] = "标签"; 
-
-  themeMenus["/blog/about"] = "关于"; 
-
-</script>
+<body>
+    <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
 
 
-  <body data-spy="scroll" data-target="#toc" data-offset="50">
+    <script>setLoadingBarProgress(20)</script>
+    <header class="l_header">
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+			<a class="logo flat-box" href='/' >
+				<!-- <i class="fa fa-home"></i> -->
+				wr4javaee
+			</a>
 
+				<div class='menu'>
+					<ul class='h-list'>
+                        
+    						
+    							<li>
+    								<a class='nav-about flat-box' href='/'>
+    									<i class='fa fa-home fa-'></i>&nbsp;主页
+    								</a>
+    							</li>
+    						
+    							<li>
+    								<a class='nav-projects flat-box' href='https://wangran.me'>
+    									<i class='fa fa-cube fa-'></i>&nbsp;项目
+    								</a>
+    							</li>
+    						
+    							<li>
+    								<a class='nav-home flat-box' href='/'>
+    									<i class='fa fa-rss fa-'></i>&nbsp;博客
+    								</a>
+    							</li>
+    						
+    							<li>
+    								<a class='nav-archives flat-box' href='/archives'>
+    									<i class='fa fa-archive fa-'></i>&nbsp;归档
+    								</a>
+    							</li>
+    						
+        			 
+					</ul>
+					<div class='underline'></div>
+				</div>
 
-  <header id="allheader" class="site-header" role="banner">
-  <div class="clearfix container">
-      <div class="site-branding">
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="Search" />
+						<span class="icon"><i class="fa fa-search fa-fw"></i></span>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a class="fa fa-search fa-fw" href='javascript:void(0)'></span></a></li>
+				
+				<li class='s-menu'><a class="fa fa-navicon fa-fw" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
 
-          <h1 class="site-title">
-            
-              <a href="/blog/" title="羽毛的博客 STAY REAL!" rel="home"> 羽毛的博客 STAY REAL! </a>
-            
-          </h1>
+		<div class='nav-sub container container--flex'>
+			<a class="logo" class="flat-box" href='javascript:void(0)'>
+				xaoxuu
+			</a>
 
-          
-            <div class="site-description">这一生只愿只要平凡快乐 谁说这样不伟大呢</div>
-          
-            
-          <nav id="main-navigation" class="main-navigation" role="navigation">
-            <a class="nav-open">Menu</a>
-            <a class="nav-close">Close</a>
-            <div class="clearfix sf-menu">
-
-              <ul id="main-nav" class="nmenu sf-js-enabled">
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/blog">首页</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/archives">归档</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/categories">分类</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/tags">标签</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/about">关于</a> </li>
-                    
-              </ul>
-            </div>
-          </nav>
-
-
-      </div>
-  </div>
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a class="fa fa-comments fa-fw flat-box" href='javascript:void(0)'></a></li>
+				<li class='s-top'><a class="fa fa-arrow-up fa-fw flat-box" href='javascript:void(0)'></a></li>
+				<li class='s-toc'><a class="fa fa-list-ul fa-fw flat-box" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+	</div>
 </header>
+	<aside class="menu-phone">
+        <div class="header">wr4javaee</div>
+		<nav>
+            <ul>
+                
+                    
+                        <li>
+                            <a class='nav-about flat-box nav flat-box' href='/'><i class='fa fa-home fa-fw'></i>&nbsp;主页</a>
+                        </li>
+                    
+                        <li>
+                            <a class='nav-projects flat-box nav flat-box' href='https://wangran.me'><i class='fa fa-cube fa-fw'></i>&nbsp;项目</a>
+                        </li>
+                    
+                        <li>
+                            <a class='nav-home flat-box nav flat-box' href='/'><i class='fa fa-rss fa-fw'></i>&nbsp;博客</a>
+                        </li>
+                    
+                        <li>
+                            <a class='nav-archives flat-box nav flat-box' href='/archives'><i class='fa fa-archive fa-fw'></i>&nbsp;归档</a>
+                        </li>
+                    
+             
+            </ul>
+		</nav>
+	</aside>
 
-
-
-
-  <div id="container">
-    <div id="wrap">
+    <script>setLoadingBarProgress(40);</script>
+    <div class="l_body">
+    <div class='container clearfix'>
+        <div class='l_main'>
+            <article id="post-zookeeper_java_api" class="post white-box article-type-post" itemscope itemprop="blogPost">
+    <section class='meta'>
+        <h1 class="title">
             
-      <div id="content" class="outer">
+                Zookeeper Java API的使用
+            
+        </h1>
+        <time>
+            2016-07-26&nbsp;&nbsp;
+            <i class="fa fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+        </time>
         
-          <section id="main" style="float:none;"><article id="post-zookeeper_java_api" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" class="article-title" itemprop="name">
-      Zookeeper Java API的使用
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="/blog/2016/07/26/zookeeper_java_api/" class="article-date">
-	  <time datetime="2016-07-26T07:00:00.000Z" itemprop="datePublished">七月 26, 2016</time>
-	</a>
-
-      
-	<span id="busuanzi_container_page_pv">
-	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-	</span>
-
+    <div class='cats'>
+        <a href="/categories/Zookeeper/">Zookeeper</a>
     </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Zookeeper官方API文档 <a href="http://zookeeper.apache.org/doc/r3.4.6/api/index.html" target="_blank" rel="external">http://zookeeper.apache.org/doc/r3.4.6/api/index.html</a></p>
+
+
+    </section>
+
+    <section class="article typo">
+
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Zookeeper官方API文档 <a href="http://zookeeper.apache.org/doc/r3.4.6/api/index.html" target="_blank" rel="noopener">http://zookeeper.apache.org/doc/r3.4.6/api/index.html</a></p>
 <a id="more"></a>
 <h2 id="通过API建立ZooKeeper-Session"><a href="#通过API建立ZooKeeper-Session" class="headerlink" title="通过API建立ZooKeeper Session"></a>通过API建立ZooKeeper Session</h2><p>ZooKeeper构造方法官方文档摘录如下</p>
 <blockquote>
@@ -175,9 +184,9 @@ var themeMenus = {};
 </table>
 </blockquote>
 <p>Demo github地址：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> me.wangran.zookeeper.demo.api;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.concurrent.CountDownLatch;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.zookeeper.WatchedEvent;</div><div class="line"><span class="keyword">import</span> org.apache.zookeeper.Watcher;</div><div class="line"><span class="keyword">import</span> org.apache.zookeeper.Watcher.Event.KeeperState;</div><div class="line"><span class="keyword">import</span> org.apache.zookeeper.ZooKeeper;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Zookeeper 创建Session</div><div class="line"> * <span class="doctag">@author</span> Wang Ran</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ZooKeeperSessionDemo</span> <span class="keyword">implements</span> <span class="title">Watcher</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> CountDownLatch countDownLatch = <span class="keyword">new</span> CountDownLatch(<span class="number">1</span>);</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		demo3();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 创建最基本的会话</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">demo1</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		String zookeeperAddress = <span class="string">"192.168.128.75:2181"</span>; <span class="comment">// Zookeeper地址，多个Zookeeper地址可以英文逗号分隔，地址可指定节点</span></div><div class="line">		<span class="keyword">int</span> sessionTimeout = <span class="number">10000</span>; <span class="comment">// session超时时间，单位毫秒</span></div><div class="line">		Watcher watcher = <span class="keyword">new</span> ZooKeeperSessionDemo(); <span class="comment">// 事件通知处理器， 创建会话时可为null</span></div><div class="line">		ZooKeeper zookeeper = <span class="keyword">new</span> ZooKeeper(zookeeperAddress, sessionTimeout, watcher);</div><div class="line">		System.out.println(<span class="string">"zookeeper connecting, state is "</span> + zookeeper.getState());</div><div class="line">		countDownLatch.await();</div><div class="line">		System.out.println(<span class="string">"zookeeper connected, state is "</span> + zookeeper.getState());</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 创建指定read only模式的会话</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">demo2</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		String zookeeperAddress = <span class="string">"192.168.128.75:2181/test_root"</span>; <span class="comment">// Zookeeper地址，多个Zookeeper地址可以英文逗号分隔，地址可指定节点</span></div><div class="line">		<span class="keyword">int</span> sessionTimeout = <span class="number">10000</span>; <span class="comment">// session超时时间，单位毫秒</span></div><div class="line">		Watcher watcher = <span class="keyword">new</span> ZooKeeperSessionDemo(); <span class="comment">// 事件通知处理器， 创建会话时可为null</span></div><div class="line">		<span class="keyword">boolean</span> canBeReadOnly = <span class="keyword">true</span>; <span class="comment">// 是否支持read only模式，默认为false，若一个机器和Zookeeper Cluster过半机器失去网络连接，则不处理所有读写请求。若未true，则该情况可提供读请求。</span></div><div class="line">		ZooKeeper zookeeper = <span class="keyword">new</span> ZooKeeper(zookeeperAddress, sessionTimeout, watcher, canBeReadOnly);</div><div class="line">		System.out.println(<span class="string">"zookeeper connecting, state is "</span> + zookeeper.getState());</div><div class="line">		countDownLatch.await();</div><div class="line">		System.out.println(<span class="string">"zookeeper connected, state is "</span> + zookeeper.getState());</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 恢复会话</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">demo3</span><span class="params">()</span>  <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		String zookeeperAddress = <span class="string">"192.168.128.75:2181/test_root"</span>; <span class="comment">// Zookeeper地址，多个Zookeeper地址可以英文逗号分隔，地址可指定节点</span></div><div class="line">		<span class="keyword">int</span> sessionTimeout = <span class="number">10000</span>; <span class="comment">// session超时时间，单位毫秒</span></div><div class="line">		Watcher watcher = <span class="keyword">new</span> ZooKeeperSessionDemo(); <span class="comment">// 事件通知处理器， 创建会话时可为null</span></div><div class="line">		ZooKeeper zookeeper = <span class="keyword">new</span> ZooKeeper(zookeeperAddress, sessionTimeout, watcher);</div><div class="line">		System.out.println(<span class="string">"zookeeper connecting, state is "</span> + zookeeper.getState());</div><div class="line">		countDownLatch.await();</div><div class="line">		System.out.println(<span class="string">"zookeeper connected, state is "</span> + zookeeper.getState());</div><div class="line">		<span class="keyword">long</span> sessionId = zookeeper.getSessionId(); <span class="comment">// 用于恢复会话</span></div><div class="line">		<span class="keyword">byte</span>[] sessionPwd = zookeeper.getSessionPasswd(); <span class="comment">// 用于恢复会话</span></div><div class="line">		countDownLatch = <span class="keyword">new</span> CountDownLatch(<span class="number">1</span>);</div><div class="line">		zookeeper = <span class="keyword">new</span> ZooKeeper(zookeeperAddress, sessionTimeout, watcher, sessionId, sessionPwd);</div><div class="line">		System.out.println(<span class="string">"zookeeper reconnecting, state is "</span> + zookeeper.getState());</div><div class="line">		countDownLatch.await();</div><div class="line">		System.out.println(<span class="string">"zookeeper reconnected, state is "</span> + zookeeper.getState());</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(WatchedEvent watchedEvent)</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"ZooKeeperWatcherDemo process, watchedEvent is "</span> + watchedEvent);</div><div class="line">		<span class="keyword">if</span>(KeeperState.SyncConnected == watchedEvent.getState()) &#123;</div><div class="line">			countDownLatch.countDown();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> me.wangran.zookeeper.demo.api;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.CountDownLatch;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.zookeeper.WatchedEvent;</span><br><span class="line"><span class="keyword">import</span> org.apache.zookeeper.Watcher;</span><br><span class="line"><span class="keyword">import</span> org.apache.zookeeper.Watcher.Event.KeeperState;</span><br><span class="line"><span class="keyword">import</span> org.apache.zookeeper.ZooKeeper;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Zookeeper 创建Session</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Wang Ran</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ZooKeeperSessionDemo</span> <span class="keyword">implements</span> <span class="title">Watcher</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> CountDownLatch countDownLatch = <span class="keyword">new</span> CountDownLatch(<span class="number">1</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		demo3();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 创建最基本的会话</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">demo1</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		String zookeeperAddress = <span class="string">"192.168.128.75:2181"</span>; <span class="comment">// Zookeeper地址，多个Zookeeper地址可以英文逗号分隔，地址可指定节点</span></span><br><span class="line">		<span class="keyword">int</span> sessionTimeout = <span class="number">10000</span>; <span class="comment">// session超时时间，单位毫秒</span></span><br><span class="line">		Watcher watcher = <span class="keyword">new</span> ZooKeeperSessionDemo(); <span class="comment">// 事件通知处理器， 创建会话时可为null</span></span><br><span class="line">		ZooKeeper zookeeper = <span class="keyword">new</span> ZooKeeper(zookeeperAddress, sessionTimeout, watcher);</span><br><span class="line">		System.out.println(<span class="string">"zookeeper connecting, state is "</span> + zookeeper.getState());</span><br><span class="line">		countDownLatch.await();</span><br><span class="line">		System.out.println(<span class="string">"zookeeper connected, state is "</span> + zookeeper.getState());</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 创建指定read only模式的会话</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">demo2</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		String zookeeperAddress = <span class="string">"192.168.128.75:2181/test_root"</span>; <span class="comment">// Zookeeper地址，多个Zookeeper地址可以英文逗号分隔，地址可指定节点</span></span><br><span class="line">		<span class="keyword">int</span> sessionTimeout = <span class="number">10000</span>; <span class="comment">// session超时时间，单位毫秒</span></span><br><span class="line">		Watcher watcher = <span class="keyword">new</span> ZooKeeperSessionDemo(); <span class="comment">// 事件通知处理器， 创建会话时可为null</span></span><br><span class="line">		<span class="keyword">boolean</span> canBeReadOnly = <span class="keyword">true</span>; <span class="comment">// 是否支持read only模式，默认为false，若一个机器和Zookeeper Cluster过半机器失去网络连接，则不处理所有读写请求。若未true，则该情况可提供读请求。</span></span><br><span class="line">		ZooKeeper zookeeper = <span class="keyword">new</span> ZooKeeper(zookeeperAddress, sessionTimeout, watcher, canBeReadOnly);</span><br><span class="line">		System.out.println(<span class="string">"zookeeper connecting, state is "</span> + zookeeper.getState());</span><br><span class="line">		countDownLatch.await();</span><br><span class="line">		System.out.println(<span class="string">"zookeeper connected, state is "</span> + zookeeper.getState());</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 恢复会话</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">demo3</span><span class="params">()</span>  <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		String zookeeperAddress = <span class="string">"192.168.128.75:2181/test_root"</span>; <span class="comment">// Zookeeper地址，多个Zookeeper地址可以英文逗号分隔，地址可指定节点</span></span><br><span class="line">		<span class="keyword">int</span> sessionTimeout = <span class="number">10000</span>; <span class="comment">// session超时时间，单位毫秒</span></span><br><span class="line">		Watcher watcher = <span class="keyword">new</span> ZooKeeperSessionDemo(); <span class="comment">// 事件通知处理器， 创建会话时可为null</span></span><br><span class="line">		ZooKeeper zookeeper = <span class="keyword">new</span> ZooKeeper(zookeeperAddress, sessionTimeout, watcher);</span><br><span class="line">		System.out.println(<span class="string">"zookeeper connecting, state is "</span> + zookeeper.getState());</span><br><span class="line">		countDownLatch.await();</span><br><span class="line">		System.out.println(<span class="string">"zookeeper connected, state is "</span> + zookeeper.getState());</span><br><span class="line">		<span class="keyword">long</span> sessionId = zookeeper.getSessionId(); <span class="comment">// 用于恢复会话</span></span><br><span class="line">		<span class="keyword">byte</span>[] sessionPwd = zookeeper.getSessionPasswd(); <span class="comment">// 用于恢复会话</span></span><br><span class="line">		countDownLatch = <span class="keyword">new</span> CountDownLatch(<span class="number">1</span>);</span><br><span class="line">		zookeeper = <span class="keyword">new</span> ZooKeeper(zookeeperAddress, sessionTimeout, watcher, sessionId, sessionPwd);</span><br><span class="line">		System.out.println(<span class="string">"zookeeper reconnecting, state is "</span> + zookeeper.getState());</span><br><span class="line">		countDownLatch.await();</span><br><span class="line">		System.out.println(<span class="string">"zookeeper reconnected, state is "</span> + zookeeper.getState());</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(WatchedEvent watchedEvent)</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"ZooKeeperWatcherDemo process, watchedEvent is "</span> + watchedEvent);</span><br><span class="line">		<span class="keyword">if</span>(KeeperState.SyncConnected == watchedEvent.getState()) &#123;</span><br><span class="line">			countDownLatch.countDown();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
-<h2 id="通过API创建节点"><a href="#通过API创建节点" class="headerlink" title="通过API创建节点"></a>通过API创建节点</h2><h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>创建节点API地址：<a href="http://zookeeper.apache.org/doc/r3.4.6/api/index.html" target="_blank" rel="external">http://zookeeper.apache.org/doc/r3.4.6/api/index.html</a></p>
+<h2 id="通过API创建节点"><a href="#通过API创建节点" class="headerlink" title="通过API创建节点"></a>通过API创建节点</h2><h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>创建节点API地址：<a href="http://zookeeper.apache.org/doc/r3.4.6/api/index.html" target="_blank" rel="noopener">http://zookeeper.apache.org/doc/r3.4.6/api/index.html</a></p>
 <p>这里，我们主要用到两个方法，分别是</p>
 <table>
 <thead>
@@ -202,7 +211,7 @@ var themeMenus = {};
 <li>data 节点的内容</li>
 <li>acl 创建节点策略</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * This Id represents anyone.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> Id ANYONE_ID_UNSAFE = <span class="keyword">new</span> Id(<span class="string">"world"</span>, <span class="string">"anyone"</span>);</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * This Id is only usable to set ACLs. It will get substituted with the</div><div class="line"> * Id's the client authenticated with.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> Id AUTH_IDS = <span class="keyword">new</span> Id(<span class="string">"auth"</span>, <span class="string">""</span>);</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * This is a completely open ACL .</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> ArrayList&lt;ACL&gt; OPEN_ACL_UNSAFE = <span class="keyword">new</span> ArrayList&lt;ACL&gt;(</div><div class="line">        Collections.singletonList(<span class="keyword">new</span> ACL(Perms.ALL, ANYONE_ID_UNSAFE)));</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * This ACL gives the creators authentication id's all permissions.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> ArrayList&lt;ACL&gt; CREATOR_ALL_ACL = <span class="keyword">new</span> ArrayList&lt;ACL&gt;(</div><div class="line">        Collections.singletonList(<span class="keyword">new</span> ACL(Perms.ALL, AUTH_IDS)));</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * This ACL gives the world the ability to read.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> ArrayList&lt;ACL&gt; READ_ACL_UNSAFE = <span class="keyword">new</span> ArrayList&lt;ACL&gt;(</div><div class="line">        Collections</div><div class="line">                .singletonList(<span class="keyword">new</span> ACL(Perms.READ, ANYONE_ID_UNSAFE)));</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This Id represents anyone.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> Id ANYONE_ID_UNSAFE = <span class="keyword">new</span> Id(<span class="string">"world"</span>, <span class="string">"anyone"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This Id is only usable to set ACLs. It will get substituted with the</span></span><br><span class="line"><span class="comment"> * Id's the client authenticated with.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> Id AUTH_IDS = <span class="keyword">new</span> Id(<span class="string">"auth"</span>, <span class="string">""</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This is a completely open ACL .</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> ArrayList&lt;ACL&gt; OPEN_ACL_UNSAFE = <span class="keyword">new</span> ArrayList&lt;ACL&gt;(</span><br><span class="line">        Collections.singletonList(<span class="keyword">new</span> ACL(Perms.ALL, ANYONE_ID_UNSAFE)));</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This ACL gives the creators authentication id's all permissions.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> ArrayList&lt;ACL&gt; CREATOR_ALL_ACL = <span class="keyword">new</span> ArrayList&lt;ACL&gt;(</span><br><span class="line">        Collections.singletonList(<span class="keyword">new</span> ACL(Perms.ALL, AUTH_IDS)));</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This ACL gives the world the ability to read.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> ArrayList&lt;ACL&gt; READ_ACL_UNSAFE = <span class="keyword">new</span> ArrayList&lt;ACL&gt;(</span><br><span class="line">        Collections</span><br><span class="line">                .singletonList(<span class="keyword">new</span> ACL(Perms.READ, ANYONE_ID_UNSAFE)));</span><br></pre></td></tr></table></figure>
 <ul>
 <li>cb 异步回调函数，当节点创建后ZooKeeper客户端自动调用本方法。需要实现StringCallback接口，重写processResult方法</li>
 <li>ctx 回调方法执行时使用的对象，通常放置上线文Context信息</li>
@@ -210,11 +219,11 @@ var themeMenus = {};
 <ul>
 <li>CreateMode节点类型枚举如下</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * The znode will not be automatically deleted upon client's disconnect</div><div class="line"> * 持久节点</div><div class="line"> */</div><div class="line">PERSISTENT (<span class="number">0</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">false</span>),</div><div class="line"><span class="comment">/**</span></div><div class="line">* The znode will not be automatically deleted upon client's disconnect,</div><div class="line">* and its name will be appended with a monotonically increasing number.</div><div class="line">* 持久顺序节点</div><div class="line">*/</div><div class="line">PERSISTENT_SEQUENTIAL (<span class="number">2</span>, <span class="keyword">false</span>, <span class="keyword">true</span>, <span class="keyword">false</span>),</div><div class="line"><span class="comment">/**</span></div><div class="line"> * The znode will be deleted upon the client's disconnect.</div><div class="line"> * 临时节点</div><div class="line"> */</div><div class="line">EPHEMERAL (<span class="number">1</span>, <span class="keyword">true</span>, <span class="keyword">false</span>, <span class="keyword">false</span>),</div><div class="line"><span class="comment">/**</span></div><div class="line"> * The znode will be deleted upon the client's disconnect, and its name</div><div class="line"> * will be appended with a monotonically increasing number.</div><div class="line"> * 临时顺序节点</div><div class="line"> */</div><div class="line">EPHEMERAL_SEQUENTIAL (<span class="number">3</span>, <span class="keyword">true</span>, <span class="keyword">true</span>, <span class="keyword">false</span>),</div><div class="line"><span class="comment">/**</span></div><div class="line"> * The znode will be a container node. Container</div><div class="line"> * nodes are special purpose nodes useful for recipes such as leader, lock,</div><div class="line"> * etc. When the last child of a container is deleted, the container becomes</div><div class="line"> * a candidate to be deleted by the server at some point in the future.</div><div class="line"> * Given this property, you should be prepared to get</div><div class="line"> * &#123;<span class="doctag">@link</span> org.apache.zookeeper.KeeperException.NoNodeException&#125;</div><div class="line"> * when creating children inside of this container node.</div><div class="line"> */</div><div class="line">CONTAINER (<span class="number">4</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">true</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * The znode will not be automatically deleted upon client's disconnect</span></span><br><span class="line"><span class="comment"> * 持久节点</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">PERSISTENT (<span class="number">0</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">false</span>),</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* The znode will not be automatically deleted upon client's disconnect,</span></span><br><span class="line"><span class="comment">* and its name will be appended with a monotonically increasing number.</span></span><br><span class="line"><span class="comment">* 持久顺序节点</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">PERSISTENT_SEQUENTIAL (<span class="number">2</span>, <span class="keyword">false</span>, <span class="keyword">true</span>, <span class="keyword">false</span>),</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * The znode will be deleted upon the client's disconnect.</span></span><br><span class="line"><span class="comment"> * 临时节点</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">EPHEMERAL (<span class="number">1</span>, <span class="keyword">true</span>, <span class="keyword">false</span>, <span class="keyword">false</span>),</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * The znode will be deleted upon the client's disconnect, and its name</span></span><br><span class="line"><span class="comment"> * will be appended with a monotonically increasing number.</span></span><br><span class="line"><span class="comment"> * 临时顺序节点</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">EPHEMERAL_SEQUENTIAL (<span class="number">3</span>, <span class="keyword">true</span>, <span class="keyword">true</span>, <span class="keyword">false</span>),</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * The znode will be a container node. Container</span></span><br><span class="line"><span class="comment"> * nodes are special purpose nodes useful for recipes such as leader, lock,</span></span><br><span class="line"><span class="comment"> * etc. When the last child of a container is deleted, the container becomes</span></span><br><span class="line"><span class="comment"> * a candidate to be deleted by the server at some point in the future.</span></span><br><span class="line"><span class="comment"> * Given this property, you should be prepared to get</span></span><br><span class="line"><span class="comment"> * &#123;<span class="doctag">@link</span> org.apache.zookeeper.KeeperException.NoNodeException&#125;</span></span><br><span class="line"><span class="comment"> * when creating children inside of this container node.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">CONTAINER (<span class="number">4</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">true</span>);</span><br></pre></td></tr></table></figure>
 <h3 id="Case"><a href="#Case" class="headerlink" title="Case"></a>Case</h3><ul>
 <li>case 1 根节点下创建持久节点/node_pokemon</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> me.wangran.zookeeper.demo.api;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.concurrent.CountDownLatch;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.zookeeper.CreateMode;</div><div class="line"><span class="keyword">import</span> org.apache.zookeeper.WatchedEvent;</div><div class="line"><span class="keyword">import</span> org.apache.zookeeper.Watcher;</div><div class="line"><span class="keyword">import</span> org.apache.zookeeper.ZooKeeper;</div><div class="line"><span class="keyword">import</span> org.apache.zookeeper.Watcher.Event.KeeperState;</div><div class="line"><span class="keyword">import</span> org.apache.zookeeper.ZooDefs.Ids;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * ZooKeeper创建节点Demo</div><div class="line"> * <span class="doctag">@author</span> Wang Ran</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ZooKeeperCreateNodeDemo</span>  <span class="keyword">implements</span> <span class="title">Watcher</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> CountDownLatch countDownLatch = <span class="keyword">new</span> CountDownLatch(<span class="number">1</span>);</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		<span class="keyword">new</span> ZooKeeperCreateNodeDemo().demo1();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 创建最基本的会话</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">demo1</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		String zookeeperAddress = <span class="string">"192.168.128.75:2181"</span>; <span class="comment">// Zookeeper地址，多个Zookeeper地址可以英文逗号分隔，地址可指定节点</span></div><div class="line">		<span class="keyword">int</span> sessionTimeout = <span class="number">10000</span>; <span class="comment">// session超时时间，单位毫秒</span></div><div class="line">		Watcher watcher = <span class="keyword">new</span> ZooKeeperCreateNodeDemo(); <span class="comment">// 事件通知处理器， 创建会话时可为null</span></div><div class="line">		ZooKeeper zookeeper = <span class="keyword">new</span> ZooKeeper(zookeeperAddress, sessionTimeout, watcher);</div><div class="line">		System.out.println(<span class="string">"zookeeper connecting, state is "</span> + zookeeper.getState());</div><div class="line">		countDownLatch.await();</div><div class="line">		System.out.println(<span class="string">"zookeeper connected, state is "</span> + zookeeper.getState());</div><div class="line">		</div><div class="line">		String newNodePath = <span class="string">"/node_pokemon"</span>;</div><div class="line">		<span class="keyword">byte</span>[] newNodeData = <span class="string">"go"</span>.getBytes();</div><div class="line">		CreateMode newNodeMode = CreateMode.PERSISTENT;</div><div class="line">		zookeeper.create(newNodePath, newNodeData, Ids.OPEN_ACL_UNSAFE, newNodeMode);</div><div class="line">		System.out.println(<span class="string">"zookeeper node created"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(WatchedEvent watchedEvent)</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"ZooKeeperWatcherDemo process, watchedEvent is "</span> + watchedEvent);</div><div class="line">		<span class="keyword">if</span>(KeeperState.SyncConnected == watchedEvent.getState()) &#123;</div><div class="line">			countDownLatch.countDown();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> me.wangran.zookeeper.demo.api;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.CountDownLatch;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.zookeeper.CreateMode;</span><br><span class="line"><span class="keyword">import</span> org.apache.zookeeper.WatchedEvent;</span><br><span class="line"><span class="keyword">import</span> org.apache.zookeeper.Watcher;</span><br><span class="line"><span class="keyword">import</span> org.apache.zookeeper.ZooKeeper;</span><br><span class="line"><span class="keyword">import</span> org.apache.zookeeper.Watcher.Event.KeeperState;</span><br><span class="line"><span class="keyword">import</span> org.apache.zookeeper.ZooDefs.Ids;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * ZooKeeper创建节点Demo</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Wang Ran</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ZooKeeperCreateNodeDemo</span>  <span class="keyword">implements</span> <span class="title">Watcher</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> CountDownLatch countDownLatch = <span class="keyword">new</span> CountDownLatch(<span class="number">1</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		<span class="keyword">new</span> ZooKeeperCreateNodeDemo().demo1();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 创建最基本的会话</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">demo1</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		String zookeeperAddress = <span class="string">"192.168.128.75:2181"</span>; <span class="comment">// Zookeeper地址，多个Zookeeper地址可以英文逗号分隔，地址可指定节点</span></span><br><span class="line">		<span class="keyword">int</span> sessionTimeout = <span class="number">10000</span>; <span class="comment">// session超时时间，单位毫秒</span></span><br><span class="line">		Watcher watcher = <span class="keyword">new</span> ZooKeeperCreateNodeDemo(); <span class="comment">// 事件通知处理器， 创建会话时可为null</span></span><br><span class="line">		ZooKeeper zookeeper = <span class="keyword">new</span> ZooKeeper(zookeeperAddress, sessionTimeout, watcher);</span><br><span class="line">		System.out.println(<span class="string">"zookeeper connecting, state is "</span> + zookeeper.getState());</span><br><span class="line">		countDownLatch.await();</span><br><span class="line">		System.out.println(<span class="string">"zookeeper connected, state is "</span> + zookeeper.getState());</span><br><span class="line">		</span><br><span class="line">		String newNodePath = <span class="string">"/node_pokemon"</span>;</span><br><span class="line">		<span class="keyword">byte</span>[] newNodeData = <span class="string">"go"</span>.getBytes();</span><br><span class="line">		CreateMode newNodeMode = CreateMode.PERSISTENT;</span><br><span class="line">		zookeeper.create(newNodePath, newNodeData, Ids.OPEN_ACL_UNSAFE, newNodeMode);</span><br><span class="line">		System.out.println(<span class="string">"zookeeper node created"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(WatchedEvent watchedEvent)</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"ZooKeeperWatcherDemo process, watchedEvent is "</span> + watchedEvent);</span><br><span class="line">		<span class="keyword">if</span>(KeeperState.SyncConnected == watchedEvent.getState()) &#123;</span><br><span class="line">			countDownLatch.countDown();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>控制台输出：</p>
 <blockquote>
 <p>zookeeper connecting, state is CONNECTING<br>ZooKeeperWatcherDemo process, watchedEvent is WatchedEvent state:SyncConnected type:None path:null<br>zookeeper connected, state is CONNECTED<br>zookeeper node created</p>
@@ -222,7 +231,7 @@ var themeMenus = {};
 <ul>
 <li>case2 创建节点后异步触发回调函数</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> me.wangran.zookeeper.demo.api;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.concurrent.CountDownLatch;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.zookeeper.AsyncCallback;</div><div class="line"><span class="keyword">import</span> org.apache.zookeeper.AsyncCallback.StringCallback;</div><div class="line"><span class="keyword">import</span> org.apache.zookeeper.CreateMode;</div><div class="line"><span class="keyword">import</span> org.apache.zookeeper.WatchedEvent;</div><div class="line"><span class="keyword">import</span> org.apache.zookeeper.Watcher;</div><div class="line"><span class="keyword">import</span> org.apache.zookeeper.ZooKeeper;</div><div class="line"><span class="keyword">import</span> org.apache.zookeeper.Watcher.Event.KeeperState;</div><div class="line"><span class="keyword">import</span> org.apache.zookeeper.ZooDefs.Ids;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * ZooKeeper创建节点Demo</div><div class="line"> * <span class="doctag">@author</span> Wang Ran</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ZooKeeperCreateNodeDemo</span>  <span class="keyword">implements</span> <span class="title">Watcher</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> CountDownLatch countDownLatch = <span class="keyword">new</span> CountDownLatch(<span class="number">1</span>);</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		<span class="keyword">new</span> ZooKeeperCreateNodeDemo().demo2();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 创建持久节点</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">demo1</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		String zookeeperAddress = <span class="string">"192.168.128.75:2181"</span>; <span class="comment">// Zookeeper地址，多个Zookeeper地址可以英文逗号分隔，地址可指定节点</span></div><div class="line">		<span class="keyword">int</span> sessionTimeout = <span class="number">10000</span>; <span class="comment">// session超时时间，单位毫秒</span></div><div class="line">		Watcher watcher = <span class="keyword">new</span> ZooKeeperCreateNodeDemo(); <span class="comment">// 事件通知处理器， 创建会话时可为null</span></div><div class="line">		ZooKeeper zookeeper = <span class="keyword">new</span> ZooKeeper(zookeeperAddress, sessionTimeout, watcher);</div><div class="line">		System.out.println(<span class="string">"zookeeper connecting, state is "</span> + zookeeper.getState());</div><div class="line">		countDownLatch.await();</div><div class="line">		System.out.println(<span class="string">"zookeeper connected, state is "</span> + zookeeper.getState());</div><div class="line">		</div><div class="line">		String newNodePath = <span class="string">"/node_pokemon"</span>;</div><div class="line">		<span class="keyword">byte</span>[] newNodeData = <span class="string">"go"</span>.getBytes();</div><div class="line">		CreateMode newNodeMode = CreateMode.PERSISTENT;</div><div class="line">		zookeeper.create(newNodePath, newNodeData, Ids.OPEN_ACL_UNSAFE, newNodeMode);</div><div class="line">		System.out.println(<span class="string">"zookeeper node created"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 创建节点后异步回调业务函数</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">demo2</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		String zookeeperAddress = <span class="string">"192.168.128.75:2181/node_pokemon"</span>; <span class="comment">// Zookeeper地址，多个Zookeeper地址可以英文逗号分隔，地址可指定节点</span></div><div class="line">		<span class="keyword">int</span> sessionTimeout = <span class="number">10000</span>; <span class="comment">// session超时时间，单位毫秒</span></div><div class="line">		Watcher watcher = <span class="keyword">new</span> ZooKeeperCreateNodeDemo(); <span class="comment">// 事件通知处理器， 创建会话时可为null</span></div><div class="line">		ZooKeeper zookeeper = <span class="keyword">new</span> ZooKeeper(zookeeperAddress, sessionTimeout, watcher);</div><div class="line">		System.out.println(<span class="string">"zookeeper connecting, state is "</span> + zookeeper.getState());</div><div class="line">		countDownLatch.await();</div><div class="line">		System.out.println(<span class="string">"zookeeper connected, state is "</span> + zookeeper.getState());</div><div class="line">		</div><div class="line">		String newNodePath = <span class="string">"/node_kinosaki"</span>;</div><div class="line">		<span class="keyword">byte</span>[] newNodeData = <span class="string">"osen"</span>.getBytes();</div><div class="line">		CreateMode newNodeMode = CreateMode.PERSISTENT_SEQUENTIAL;</div><div class="line">		Object ctx = <span class="string">"ContextDemo"</span>;</div><div class="line">		zookeeper.create(newNodePath, newNodeData, Ids.OPEN_ACL_UNSAFE, newNodeMode, <span class="keyword">new</span> StringCallbackDemo(), ctx);</div><div class="line">		System.out.println(<span class="string">"zookeeper node created"</span>);</div><div class="line">		Thread.sleep(<span class="number">10</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 异步回调函数</div><div class="line">	 * <span class="doctag">@author</span> Wang Ran</div><div class="line">	 */</div><div class="line">	<span class="class"><span class="keyword">class</span> <span class="title">StringCallbackDemo</span> <span class="keyword">implements</span> <span class="title">AsyncCallback</span>.<span class="title">StringCallback</span> </span>&#123;</div><div class="line">		<span class="meta">@Override</span></div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">processResult</span><span class="params">(<span class="keyword">int</span> rc, String path, Object ctx, String name)</span> </span>&#123;</div><div class="line">			System.out.println(<span class="string">"StringCallbackDemo.processResult executed!, resultCode is "</span> + rc</div><div class="line">					+ <span class="string">", path is"</span> + path <span class="comment">// 调用接口时传入的Path</span></div><div class="line">					+ <span class="string">", context is "</span> + ctx.toString() <span class="comment">// 调用接口时传入的Context</span></div><div class="line">					+ <span class="string">", node name is "</span> + name); <span class="comment">// 实际在服务器中创建的节点名称</span></div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(WatchedEvent watchedEvent)</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"ZooKeeperWatcherDemo process, watchedEvent is "</span> + watchedEvent);</div><div class="line">		<span class="keyword">if</span>(KeeperState.SyncConnected == watchedEvent.getState()) &#123;</div><div class="line">			countDownLatch.countDown();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> me.wangran.zookeeper.demo.api;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.CountDownLatch;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.zookeeper.AsyncCallback;</span><br><span class="line"><span class="keyword">import</span> org.apache.zookeeper.AsyncCallback.StringCallback;</span><br><span class="line"><span class="keyword">import</span> org.apache.zookeeper.CreateMode;</span><br><span class="line"><span class="keyword">import</span> org.apache.zookeeper.WatchedEvent;</span><br><span class="line"><span class="keyword">import</span> org.apache.zookeeper.Watcher;</span><br><span class="line"><span class="keyword">import</span> org.apache.zookeeper.ZooKeeper;</span><br><span class="line"><span class="keyword">import</span> org.apache.zookeeper.Watcher.Event.KeeperState;</span><br><span class="line"><span class="keyword">import</span> org.apache.zookeeper.ZooDefs.Ids;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * ZooKeeper创建节点Demo</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Wang Ran</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ZooKeeperCreateNodeDemo</span>  <span class="keyword">implements</span> <span class="title">Watcher</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> CountDownLatch countDownLatch = <span class="keyword">new</span> CountDownLatch(<span class="number">1</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		<span class="keyword">new</span> ZooKeeperCreateNodeDemo().demo2();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 创建持久节点</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">demo1</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		String zookeeperAddress = <span class="string">"192.168.128.75:2181"</span>; <span class="comment">// Zookeeper地址，多个Zookeeper地址可以英文逗号分隔，地址可指定节点</span></span><br><span class="line">		<span class="keyword">int</span> sessionTimeout = <span class="number">10000</span>; <span class="comment">// session超时时间，单位毫秒</span></span><br><span class="line">		Watcher watcher = <span class="keyword">new</span> ZooKeeperCreateNodeDemo(); <span class="comment">// 事件通知处理器， 创建会话时可为null</span></span><br><span class="line">		ZooKeeper zookeeper = <span class="keyword">new</span> ZooKeeper(zookeeperAddress, sessionTimeout, watcher);</span><br><span class="line">		System.out.println(<span class="string">"zookeeper connecting, state is "</span> + zookeeper.getState());</span><br><span class="line">		countDownLatch.await();</span><br><span class="line">		System.out.println(<span class="string">"zookeeper connected, state is "</span> + zookeeper.getState());</span><br><span class="line">		</span><br><span class="line">		String newNodePath = <span class="string">"/node_pokemon"</span>;</span><br><span class="line">		<span class="keyword">byte</span>[] newNodeData = <span class="string">"go"</span>.getBytes();</span><br><span class="line">		CreateMode newNodeMode = CreateMode.PERSISTENT;</span><br><span class="line">		zookeeper.create(newNodePath, newNodeData, Ids.OPEN_ACL_UNSAFE, newNodeMode);</span><br><span class="line">		System.out.println(<span class="string">"zookeeper node created"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 创建节点后异步回调业务函数</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">demo2</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		String zookeeperAddress = <span class="string">"192.168.128.75:2181/node_pokemon"</span>; <span class="comment">// Zookeeper地址，多个Zookeeper地址可以英文逗号分隔，地址可指定节点</span></span><br><span class="line">		<span class="keyword">int</span> sessionTimeout = <span class="number">10000</span>; <span class="comment">// session超时时间，单位毫秒</span></span><br><span class="line">		Watcher watcher = <span class="keyword">new</span> ZooKeeperCreateNodeDemo(); <span class="comment">// 事件通知处理器， 创建会话时可为null</span></span><br><span class="line">		ZooKeeper zookeeper = <span class="keyword">new</span> ZooKeeper(zookeeperAddress, sessionTimeout, watcher);</span><br><span class="line">		System.out.println(<span class="string">"zookeeper connecting, state is "</span> + zookeeper.getState());</span><br><span class="line">		countDownLatch.await();</span><br><span class="line">		System.out.println(<span class="string">"zookeeper connected, state is "</span> + zookeeper.getState());</span><br><span class="line">		</span><br><span class="line">		String newNodePath = <span class="string">"/node_kinosaki"</span>;</span><br><span class="line">		<span class="keyword">byte</span>[] newNodeData = <span class="string">"osen"</span>.getBytes();</span><br><span class="line">		CreateMode newNodeMode = CreateMode.PERSISTENT_SEQUENTIAL;</span><br><span class="line">		Object ctx = <span class="string">"ContextDemo"</span>;</span><br><span class="line">		zookeeper.create(newNodePath, newNodeData, Ids.OPEN_ACL_UNSAFE, newNodeMode, <span class="keyword">new</span> StringCallbackDemo(), ctx);</span><br><span class="line">		System.out.println(<span class="string">"zookeeper node created"</span>);</span><br><span class="line">		Thread.sleep(<span class="number">10</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 异步回调函数</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@author</span> Wang Ran</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">StringCallbackDemo</span> <span class="keyword">implements</span> <span class="title">AsyncCallback</span>.<span class="title">StringCallback</span> </span>&#123;</span><br><span class="line">		<span class="meta">@Override</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">processResult</span><span class="params">(<span class="keyword">int</span> rc, String path, Object ctx, String name)</span> </span>&#123;</span><br><span class="line">			System.out.println(<span class="string">"StringCallbackDemo.processResult executed!, resultCode is "</span> + rc</span><br><span class="line">					+ <span class="string">", path is"</span> + path <span class="comment">// 调用接口时传入的Path</span></span><br><span class="line">					+ <span class="string">", context is "</span> + ctx.toString() <span class="comment">// 调用接口时传入的Context</span></span><br><span class="line">					+ <span class="string">", node name is "</span> + name); <span class="comment">// 实际在服务器中创建的节点名称</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(WatchedEvent watchedEvent)</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"ZooKeeperWatcherDemo process, watchedEvent is "</span> + watchedEvent);</span><br><span class="line">		<span class="keyword">if</span>(KeeperState.SyncConnected == watchedEvent.getState()) &#123;</span><br><span class="line">			countDownLatch.countDown();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>控制台输出：</p>
 <blockquote>
 <p>zookeeper connecting, state is CONNECTING<br>ZooKeeperWatcherDemo process, watchedEvent is WatchedEvent state:SyncConnected type:None path:null<br>zookeeper connected, state is CONNECTED<br>zookeeper node created<br>StringCallbackDemo.processResult executed!, resultCode is 0, path is/node_kinosaki, context is ContextDemo, node name is /node_kinosaki0000000005</p>
@@ -458,212 +467,393 @@ var themeMenus = {};
 </tbody>
 </table>
 
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/blog/categories/Zookeeper/">Zookeeper</a>
+        </div>
 
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Zookeeper/">Zookeeper</a></li></ul>
-
-      
         
-	<div id="comment">
-	
-	<!-- 多说评论框 start -->
-	 <div class="ds-thread" data-thread-key="/blog/2016/07/26/zookeeper_java_api/" data-title="Zookeeper Java API的使用" data-url="http://wangran.me/blog/blog/2016/07/26/zookeeper_java_api/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"wr4javaee"};
-	  (function() {
-	    var ds = document.createElement('script');
-	    ds.type = 'text/javascript';ds.async = true;
-	    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-	    ds.charset = 'UTF-8';
-	    (document.getElementsByTagName('head')[0] 
-	     || document.getElementsByTagName('body')[0]).appendChild(ds);
-	  })();
-	  </script>
-	<!-- 多说公共JS代码 end -->
-	
-	</div>
-	<link rel="stylesheet" href="/blog/css/comment.css">
-
-
-      
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/blog/2016/07/27/zookeeper_curator/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">
+            <div class="article-tags tags">
+                
+                    <a href="/tags/Zookeeper/"><i class="fa fa-tag fa-fw" aria-hidden="true"></i>&nbsp;Zookeeper</a>
+                
+            </div>
         
-          Zookeeper Curator的使用
-        
-      </div>
-    </a>
-  
-  
-    <a href="/blog/2016/07/23/zookeeper_deploy_and_client_using/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">Zookeeper的安装部署与客户端使用</div>
-    </a>
-  
-</nav>
 
-  
+        
+            <div class="prev-next">
+                
+                    <section class="prev" >
+                        <span class="art-item-left">
+                            <h6><i class="fa fa-chevron-left" aria-hidden="true"></i>&nbsp;上一篇</h6>
+                            <h4>
+                                <a href="/2016/07/27/zookeeper_curator/" rel="prev" title="Zookeeper Curator的使用">
+                                  
+                                      Zookeeper Curator的使用
+                                  
+                                </a>
+                            </h4>
+                            
+                                <h6 class="tags">
+                                    
+                                        <i class="fa fa-tag fa-fw"></i>Zookeeper
+                                    
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>下一篇&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/2016/07/23/zookeeper_deploy_and_client_using/" rel="prev" title="Zookeeper的安装部署与客户端使用">
+                                    
+                                        Zookeeper的安装部署与客户端使用
+                                    
+                                </a>
+                            </h4>
+                            
+                                <h6 class="tags">
+                                    
+                                        <i class="fa fa-tag fa-fw"></i>Zookeeper
+                                    
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+
+    </section>
+
 </article>
 
-<!-- Table of Contents -->
+<br>
 
-  <aside id="sidebar">
-    <div id="toc" class="toc-article">
-    <strong class="toc-title">文章目录</strong>
-    
-      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过API建立ZooKeeper-Session"><span class="nav-number">2.</span> <span class="nav-text">通过API建立ZooKeeper Session</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过API创建节点"><span class="nav-number">3.</span> <span class="nav-text">通过API创建节点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#说明"><span class="nav-number">3.1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Case"><span class="nav-number">3.2.</span> <span class="nav-text">Case</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过API读取节点"><span class="nav-number">4.</span> <span class="nav-text">通过API读取节点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#API说明："><span class="nav-number">4.1.</span> <span class="nav-text">API说明：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getChildren查询指定节点的所有子节点"><span class="nav-number">4.2.</span> <span class="nav-text">getChildren查询指定节点的所有子节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getData查询指定节点的数据内容"><span class="nav-number">4.3.</span> <span class="nav-text">getData查询指定节点的数据内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数说明"><span class="nav-number">4.4.</span> <span class="nav-text">参数说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过API更新节点"><span class="nav-number">5.</span> <span class="nav-text">通过API更新节点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#API说明"><span class="nav-number">5.1.</span> <span class="nav-text">API说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数说明-1"><span class="nav-number">5.2.</span> <span class="nav-text">参数说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过API删除节点"><span class="nav-number">6.</span> <span class="nav-text">通过API删除节点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#API说明-1"><span class="nav-number">6.1.</span> <span class="nav-text">API说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过API判断节点是否存在"><span class="nav-number">7.</span> <span class="nav-text">通过API判断节点是否存在</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#API说明-2"><span class="nav-number">7.1.</span> <span class="nav-text">API说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#权限控制"><span class="nav-number">8.</span> <span class="nav-text">权限控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#API说明-3"><span class="nav-number">8.1.</span> <span class="nav-text">API说明</span></a></li></ol></li></ol>
-    
+<!-- 显示推荐文章和评论 -->
+
+    <article class="post white-box comments">
+        <section class="article typo">
+
+            
+                
+
+    <div class="recommended_posts">
+        <h4><i class="fa fa-bookmark fa-fw" aria-hidden="true"></i>&nbsp;你可能感兴趣的文章</h4>
+        <ul>
+            
+                <li><a href="https://wangran.me/2016/10/20/github-pages_init/">基于Github搭建个人博客</a></li>
+            
+                <li><a href="https://wangran.me/2016/07/27/zookeeper_curator/">Zookeeper Curator的使用</a></li>
+            
+                <li><a href="https://wangran.me/2016/07/23/zookeeper_deploy_and_client_using/">Zookeeper的安装部署与客户端使用</a></li>
+            
+                <li><a href="https://wangran.me/2016/07/18/zookeeper_summary/">Zookeeper学习笔记二</a></li>
+            
+                <li><a href="https://wangran.me/2016/07/10/zookeeper_paxos/">Zookeeper学习笔记一之Paxos算法</a></li>
+            
+        </ul>
     </div>
-  </aside>
-
-</section>
-        
-      </div>
-      <footer id="footer" class="site-footer">
-  
-
-  <div class="clearfix container">
-      <div class="site-info">
-	      &copy; 2017 羽毛的博客 STAY REAL! All Rights Reserved.
-          
-            <span id="busuanzi_container_site_uv">
-              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
-              本站总访问量<span id="busuanzi_value_site_pv"></span>次
-            </span>
-          
-      </div>
-      <div class="site-credit">
-        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
-      </div>
-  </div>
-</footer>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
 
 
-<!-- min height -->
+            
+
+            
+
+                
+
+                
+                    <h4><i class="fa fa-comments fa-fw" aria-hidden="true"></i>&nbsp;LiveRe评论</h4>
+                    <section id="comments">
+                        <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTU4Ny82MTU1">
+                            <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+                        </div>
+                    </section>
+                
+
+                
+            
+
+        </section>
+    </article>
+
 
 <script>
-    var contentdiv = document.getElementById("content");
-
-    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    window.subData = {
+        title: 'Zookeeper Java API的使用',
+        tools: true
+    }
 </script>
+
+
+        </div>
+        <aside class='l_side'>
+            
+    
+        
+    <section class='m_widget author'>
+        
+            <div class='header'>
+                <img class='avatar' src='https://wangran.me/images/yumao.jpg' />
+            </div>
+        
+        <div class='content'>
+            
+                <h2>STAY REAL!</h2>
+            
+            
+                <div>
+                    <i class="fa fa-quote-left fa-3x fa-pull-left" aria-hidden="true"></i>
+                    人生无限公司员工
+                </div>
+            
+        </div>
+        
+            <div class="social-wrapper">
+              
+                
+                    <a href="mailto:wr4javaee@126.com" class="social flat-box" target="_blank" rel="external"><i class="social fa fa-envelope" aria-hidden="true"></i></a>
+                
+              
+                
+                    <a href="https://github.com/wr4javaee" class="social flat-box" target="_blank" rel="external"><i class="social fa fa-github" aria-hidden="true"></i></a>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                    <a href="https://music.163.com/#/user/home?id=102135502" class="social flat-box" target="_blank" rel="external"><i class="social fa fa-music" aria-hidden="true"></i></a>
+                
+              
+                
+                    <a href="atom" class="social flat-box" target="_blank" rel="external"><i class="social fa fa-rss" aria-hidden="true"></i></a>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            </div>
+        
+    </section>
+
+
+    
+    
+        <section class='m_widget categories'>
+    <div class='header'><i class="fa fa-sitemap fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;分类</div>
+    <div class='content'>
+        
+            <ul class="entry">
+                
+                    <li><a class="flat-box" href="/categories/Database/"><div class='name'>Database</div><div class='badge'>1</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/Github/"><div class='name'>Github</div><div class='badge'>1</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/Spring-Cloud/"><div class='name'>Spring Cloud</div><div class='badge'>1</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/TCP/"><div class='name'>TCP</div><div class='badge'>1</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/Zookeeper/"><div class='name'>Zookeeper</div><div class='badge'>5</div></a></li>
+                
+            </ul>
+        
     </div>
-    <!-- <nav id="mobile-nav">
-  
-    <a href="/blog/blog" class="mobile-nav-link">Home</a>
-  
-    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
-  
-    <a href="/blog/categories" class="mobile-nav-link">Categories</a>
-  
-    <a href="/blog/tags" class="mobile-nav-link">Tags</a>
-  
-    <a href="/blog/about" class="mobile-nav-link">About</a>
-  
-</nav> -->
+</section>
+
+    
+    
+        
+    <section class='m_widget tagcloud'>
+        <div class="header"><i class="fa fa-tags fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;标签</div>
+        <div class='content'>
+            <a href="/tags/Github/" style="font-size: 14px; color: #999">Github</a> <a href="/tags/TCP/" style="font-size: 14px; color: #999">TCP</a> <a href="/tags/Zookeeper/" style="font-size: 24px; color: #555">Zookeeper</a> <a href="/tags/Zuul/" style="font-size: 14px; color: #999">Zuul</a> <a href="/tags/数据库/" style="font-size: 14px; color: #999">数据库</a>
+        </div>
+    </section>
+
+
+    
+    
+        <section class='m_widget music'>
+    <div class='header'><i class="fa fa-headphones fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;音乐</div>
+    <div class='content'>
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=100% height=450 src="//music.163.com/outchain/player?type=0&id=2404670714&auto=0&height=450"></iframe>
+    </div>
+</section>
+
+    
+    
+        <section class='m_widget links'>
+    <div class='header'><i class="fa fa-thumbs-up fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;友链</div>
+    <div class='content'>
+        <ul class="entry" id="links">
+            
+                <li><a class="flat-box" target="_blank" rel="external nofollow noopener noreferrer" href="https://wangran.me">
+                    <div class='name'>
+                        <i class="fa fa-user-circle-o fa-fw" aria-hidden="true"></i>
+                        &nbsp;&nbsp;wr4javaee
+                    </div>
+                </a></li>
+            
+            <li><a class="flat-box" target="_blank" rel="external nofollow noopener noreferrer" href="mailto:?subject=交换友链">
+                <div class='name'>
+                    <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
+                    &nbsp;&nbsp;联系博主交换友链
+                </div>
+            </a></li>
+        </ul>
+
+    </div>
+</section>
+
+    
+    
+        
+    <section class='m_widget toc-wrapper'>
+        <div class="header"><i class="fa fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;目录</div>
+        <div class='content'>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过API建立ZooKeeper-Session"><span class="toc-text">通过API建立ZooKeeper Session</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过API创建节点"><span class="toc-text">通过API创建节点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#说明"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Case"><span class="toc-text">Case</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过API读取节点"><span class="toc-text">通过API读取节点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#API说明："><span class="toc-text">API说明：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#getChildren查询指定节点的所有子节点"><span class="toc-text">getChildren查询指定节点的所有子节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#getData查询指定节点的数据内容"><span class="toc-text">getData查询指定节点的数据内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参数说明"><span class="toc-text">参数说明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过API更新节点"><span class="toc-text">通过API更新节点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#API说明"><span class="toc-text">API说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参数说明-1"><span class="toc-text">参数说明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过API删除节点"><span class="toc-text">通过API删除节点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#API说明-1"><span class="toc-text">API说明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过API判断节点是否存在"><span class="toc-text">通过API判断节点是否存在</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#API说明-2"><span class="toc-text">API说明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#权限控制"><span class="toc-text">权限控制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#API说明-3"><span class="toc-text">API说明</span></a></li></ol></li></ol>
+        </div>
+    </section>
+
+
     
 
-<!-- mathjax config similar to math.stackexchange -->
 
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
-    }
-  });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-
-  <link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
-  <script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/blog/js/script.js"></script>
-<script src="/blog/js/bootstrap.js"></script>
-<script src="/blog/js/main.js"></script>
-
-
-<!-- Google Analytics -->
-<script type="text/javascript">
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-80991226-1', 'auto');
-ga('send', 'pageview');
-
-</script>
-<!-- End Google Analytics -->
-
-
-
-
-
-
-  <div style="display: none;">
-    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
-  </div>
-
-
-
-	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-	</script>
+        </aside>
+        <script>setLoadingBarProgress(60);</script>
+    </div>
+    </div>
+    <footer id="footer" class="clearfix">
+    
+        <div class="social-wrapper">
+          
+              
+                  <a href="mailto:wr4javaee@126.com" class="social fa fa-envelope flat-box" target="_blank" rel="external"></a>
+              
+          
+              
+                  <a href="https://github.com/wr4javaee" class="social fa fa-github flat-box" target="_blank" rel="external"></a>
+              
+          
+              
+          
+              
+          
+              
+          
+              
+                  <a href="https://music.163.com/#/user/home?id=102135502" class="social fa fa-music flat-box" target="_blank" rel="external"></a>
+              
+          
+              
+                  <a href="atom" class="social fa fa-rss flat-box" target="_blank" rel="external"></a>
+              
+          
+              
+          
+              
+          
+              
+          
+              
+          
+              
+          
+              
+          
+              
+          
+              
+          
+              
+          
+              
+          
+              
+          
+              
+          
+        </div>
+    
+    <br>
+    <div>博客内容遵循 <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="licenses">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></div>
+    <div>本站使用 <a href="https://github.com/xaoxuu/hexo-theme-material-x" target="_blank" class="codename">Material X</a> 作为主题，
+		总访问量为 <span id="busuanzi_value_site_pv"><i class="fa fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span> 次。
+    </div>
+</footer>
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
 
 
-
-	<script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?b2565d31550c78e030ced325d605abaa";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
+    <script>setLoadingBarProgress(80);</script>
+    <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src='//cdn.bootcss.com/node-waves/0.7.5/waves.min.js'></script>
+<script src="//cdn.bootcss.com/scrollReveal.js/3.3.2/scrollreveal.min.js"></script>
+<!-- 访问统计 -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
+<script src="/js/jquery.fitvids.js"></script>
+
+    <script>
+        var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+        var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+        var ALGOLIA_API_KEY = "";
+        var ALGOLIA_APP_ID = "";
+        var ALGOLIA_INDEX_NAME = "";
+        var AZURE_SERVICE_NAME = "";
+        var AZURE_INDEX_NAME = "";
+        var AZURE_QUERY_KEY = "";
+        var BAIDU_API_ID = "";
+        var SEARCH_SERVICE = "hexo" || "hexo";
+        var ROOT = "/"||"/";
+        if(!ROOT.endsWith('/'))ROOT += '/';
+    </script>
+
+<script src="/js/search.js"></script>
+<script src="/js/app.js"></script>
 
 
-  </div>
+    
+    
+        <script type="text/javascript">
+           (function(d, s) {
+               var j, e = d.getElementsByTagName(s)[0];
+               if (typeof LivereTower === 'function') { return; }
+               j = d.createElement(s);
+               j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+               j.async = true;
+               e.parentNode.insertBefore(j, e);
+           })(document, 'script');
+        </script>
+    
+    
 
-  <a id="rocket" href="#top" class=""></a>
-  <script type="text/javascript" src="/js/totop.js" async=""></script>
+
+    <script>setLoadingBarProgress(100);</script>
 </body>
-</html>

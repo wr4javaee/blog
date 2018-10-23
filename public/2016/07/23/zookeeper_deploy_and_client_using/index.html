@@ -2,180 +2,183 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>zookeeper的安装部署与客户端使用 | 羽毛的博客 STAY REAL!</title>
+  <title>Zookeeper的安装部署与客户端使用 | wr4javaee</title>
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" href="/">
+  <link rel="alternate" href="/atom.xml" title="wr4javaee">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  
-  <meta name="keywords" content="Zookeeper zkCli.sh zkServer.sh" />
-  
-  
-    <meta name="google-site-verification" content="wr4javaee" />
-  
-  
-    <meta name="baidu-site-verification" content="wr4javaee" />
-  
-  
-  <meta name="description" content="zookeeper官方网站: http://zookeeper.apache.org/
-Zookeeper的安装与部署Zookeeper通过Java编写，因此运行前需要配置好JRE
-下载zookeeper下载地址为http://mirrors.cnnic.cn/apache/zookeeper/">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Zookeeper的安装部署与客户端使用">
-<meta property="og:url" content="http://wangran.me/blog/2016/07/23/zookeeper_deploy_and_client_using/index.html">
-<meta property="og:site_name" content="羽毛的博客 STAY REAL!">
-<meta property="og:description" content="zookeeper官方网站: http://zookeeper.apache.org/
-Zookeeper的安装与部署Zookeeper通过Java编写，因此运行前需要配置好JRE
-下载zookeeper下载地址为http://mirrors.cnnic.cn/apache/zookeeper/">
-<meta property="og:updated_time" content="2016-07-27T02:42:43.396Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zookeeper的安装部署与客户端使用">
-<meta name="twitter:description" content="zookeeper官方网站: http://zookeeper.apache.org/
-Zookeeper的安装与部署Zookeeper通过Java编写，因此运行前需要配置好JRE
-下载zookeeper下载地址为http://mirrors.cnnic.cn/apache/zookeeper/">
-  
-    <link rel="alternate" href="/atom.xml" title="羽毛的博客 STAY REAL!" type="application/atom+xml">
-  
-  <link rel="icon" href="/blog/css/images/favicon.ico">
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
-  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-  <style type="text/css">
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
-    
-  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
-  <link rel="stylesheet" href="/blog/css/style.css">
 
-  <script src="/blog/js/jquery-3.1.1.min.js"></script>
-
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="/blog/css/bootstrap.css" >
-  <link rel="stylesheet" href="/blog/css/hiero.css" >
-  <link rel="stylesheet" href="/blog/css/glyphs.css" >
-
+  <link rel="shortcut icon" href="" />
+  <link rel="icon" href="" />
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href='//cdn.bootcss.com/node-waves/0.7.5/waves.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="/style.css">
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
 </head>
 
-<script>
-var themeMenus = {};
-
-  themeMenus["/blog/blog"] = "首页"; 
-
-  themeMenus["/blog/archives"] = "归档"; 
-
-  themeMenus["/blog/categories"] = "分类"; 
-
-  themeMenus["/blog/tags"] = "标签"; 
-
-  themeMenus["/blog/about"] = "关于"; 
-
-</script>
+<body>
+    <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
 
 
-  <body data-spy="scroll" data-target="#toc" data-offset="50">
+    <script>setLoadingBarProgress(20)</script>
+    <header class="l_header">
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+			<a class="logo flat-box" href='/' >
+				<!-- <i class="fa fa-home"></i> -->
+				wr4javaee
+			</a>
 
+				<div class='menu'>
+					<ul class='h-list'>
+                        
+    						
+    							<li>
+    								<a class='nav-about flat-box' href='/'>
+    									<i class='fa fa-home fa-'></i>&nbsp;主页
+    								</a>
+    							</li>
+    						
+    							<li>
+    								<a class='nav-projects flat-box' href='https://wangran.me'>
+    									<i class='fa fa-cube fa-'></i>&nbsp;项目
+    								</a>
+    							</li>
+    						
+    							<li>
+    								<a class='nav-home flat-box' href='/'>
+    									<i class='fa fa-rss fa-'></i>&nbsp;博客
+    								</a>
+    							</li>
+    						
+    							<li>
+    								<a class='nav-archives flat-box' href='/archives'>
+    									<i class='fa fa-archive fa-'></i>&nbsp;归档
+    								</a>
+    							</li>
+    						
+        			 
+					</ul>
+					<div class='underline'></div>
+				</div>
 
-  <header id="allheader" class="site-header" role="banner">
-  <div class="clearfix container">
-      <div class="site-branding">
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="Search" />
+						<span class="icon"><i class="fa fa-search fa-fw"></i></span>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a class="fa fa-search fa-fw" href='javascript:void(0)'></span></a></li>
+				
+				<li class='s-menu'><a class="fa fa-navicon fa-fw" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
 
-          <h1 class="site-title">
-            
-              <a href="/blog/" title="羽毛的博客 STAY REAL!" rel="home"> 羽毛的博客 STAY REAL! </a>
-            
-          </h1>
+		<div class='nav-sub container container--flex'>
+			<a class="logo" class="flat-box" href='javascript:void(0)'>
+				xaoxuu
+			</a>
 
-          
-            <div class="site-description">这一生只愿只要平凡快乐 谁说这样不伟大呢</div>
-          
-            
-          <nav id="main-navigation" class="main-navigation" role="navigation">
-            <a class="nav-open">Menu</a>
-            <a class="nav-close">Close</a>
-            <div class="clearfix sf-menu">
-
-              <ul id="main-nav" class="nmenu sf-js-enabled">
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/blog">首页</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/archives">归档</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/categories">分类</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/tags">标签</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/about">关于</a> </li>
-                    
-              </ul>
-            </div>
-          </nav>
-
-
-      </div>
-  </div>
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a class="fa fa-comments fa-fw flat-box" href='javascript:void(0)'></a></li>
+				<li class='s-top'><a class="fa fa-arrow-up fa-fw flat-box" href='javascript:void(0)'></a></li>
+				<li class='s-toc'><a class="fa fa-list-ul fa-fw flat-box" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+	</div>
 </header>
+	<aside class="menu-phone">
+        <div class="header">wr4javaee</div>
+		<nav>
+            <ul>
+                
+                    
+                        <li>
+                            <a class='nav-about flat-box nav flat-box' href='/'><i class='fa fa-home fa-fw'></i>&nbsp;主页</a>
+                        </li>
+                    
+                        <li>
+                            <a class='nav-projects flat-box nav flat-box' href='https://wangran.me'><i class='fa fa-cube fa-fw'></i>&nbsp;项目</a>
+                        </li>
+                    
+                        <li>
+                            <a class='nav-home flat-box nav flat-box' href='/'><i class='fa fa-rss fa-fw'></i>&nbsp;博客</a>
+                        </li>
+                    
+                        <li>
+                            <a class='nav-archives flat-box nav flat-box' href='/archives'><i class='fa fa-archive fa-fw'></i>&nbsp;归档</a>
+                        </li>
+                    
+             
+            </ul>
+		</nav>
+	</aside>
 
-
-
-
-  <div id="container">
-    <div id="wrap">
+    <script>setLoadingBarProgress(40);</script>
+    <div class="l_body">
+    <div class='container clearfix'>
+        <div class='l_main'>
+            <article id="post-zookeeper_deploy_and_client_using" class="post white-box article-type-post" itemscope itemprop="blogPost">
+    <section class='meta'>
+        <h1 class="title">
             
-      <div id="content" class="outer">
+                Zookeeper的安装部署与客户端使用
+            
+        </h1>
+        <time>
+            2016-07-23&nbsp;&nbsp;
+            <i class="fa fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+        </time>
         
-          <section id="main" style="float:none;"><article id="post-zookeeper_deploy_and_client_using" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" class="article-title" itemprop="name">
-      Zookeeper的安装部署与客户端使用
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="/blog/2016/07/23/zookeeper_deploy_and_client_using/" class="article-date">
-	  <time datetime="2016-07-23T07:00:00.000Z" itemprop="datePublished">七月 23, 2016</time>
-	</a>
-
-      
-	<span id="busuanzi_container_page_pv">
-	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-	</span>
-
+    <div class='cats'>
+        <a href="/categories/Zookeeper/">Zookeeper</a>
     </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>zookeeper官方网站: <a href="http://zookeeper.apache.org/" target="_blank" rel="external">http://zookeeper.apache.org/</a></p>
+
+
+    </section>
+
+    <section class="article typo">
+
+        <div class="article-entry" itemprop="articleBody">
+            <p>zookeeper官方网站: <a href="http://zookeeper.apache.org/" target="_blank" rel="noopener">http://zookeeper.apache.org/</a></p>
 <h2 id="Zookeeper的安装与部署"><a href="#Zookeeper的安装与部署" class="headerlink" title="Zookeeper的安装与部署"></a>Zookeeper的安装与部署</h2><p>Zookeeper通过Java编写，因此运行前需要配置好JRE</p>
-<h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>zookeeper下载地址为<a href="http://mirrors.cnnic.cn/apache/zookeeper/" target="_blank" rel="external">http://mirrors.cnnic.cn/apache/zookeeper/</a><br><a id="more"></a></p>
+<h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>zookeeper下载地址为<a href="http://mirrors.cnnic.cn/apache/zookeeper/" target="_blank" rel="noopener">http://mirrors.cnnic.cn/apache/zookeeper/</a><br><a id="more"></a></p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>Zookeeper官方下载的文件为.tar.gz格式，我们只需解压即可完成安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -xzvf zookeeper-3.4.6.tar.gz</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xzvf zookeeper-3.4.6.tar.gz</span><br></pre></td></tr></table></figure>
 <h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><h4 id="创建zoo-cfg文件"><a href="#创建zoo-cfg文件" class="headerlink" title="创建zoo.cfg文件"></a>创建zoo.cfg文件</h4><p>我们进入到解压后的Zookeeper目录下，找到/conf/zoo_sample.cfg文件，重命名为zoo.cfg</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"># The number of milliseconds of each tick</div><div class="line"># 基本事件单元，以毫秒为单位。它用来指示心跳，最小的 session 过期时间为两倍的 tickTime.</div><div class="line">tickTime=2000</div><div class="line"># The number of ticks that the initial </div><div class="line"># synchronization phase can take</div><div class="line">initLimit=10</div><div class="line"># The number of ticks that can pass between </div><div class="line"># sending a request and getting an acknowledgement</div><div class="line">syncLimit=5</div><div class="line"># the directory where the snapshot is stored.</div><div class="line"># do not use /tmp for storage, /tmp here is just </div><div class="line"># example sakes.</div><div class="line"># 存储内存中数据库快照的位置，如果不设置参数，更新事务日志将被存储到默认位置</div><div class="line">dataDir=/home/yumao/zookeeper/data</div><div class="line">dataLogDir=/home/yumao/zookeeper/log</div><div class="line"># the port at which the clients will connect</div><div class="line"># 监听客户端连接的端口</div><div class="line">clientPort=2181</div><div class="line"># the maximum number of client connections.</div><div class="line"># increase this if you need to handle more clients</div><div class="line">#maxClientCnxns=60</div><div class="line">#</div><div class="line"># Be sure to read the maintenance section of the </div><div class="line"># administrator guide before turning on autopurge.</div><div class="line">#</div><div class="line"># http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance</div><div class="line">#</div><div class="line"># The number of snapshots to retain in dataDir</div><div class="line">#autopurge.snapRetainCount=3</div><div class="line"># 格式为server.id=host:port:port, 其中id为在dataDir目录下创建的myid文件中的数字, 每个机器的数字必须保证唯一, id的范围是1~255</div><div class="line"># 以下配置为单机配置</div><div class="line">server.1=127.0.0.1:2888:3888</div><div class="line"></div><div class="line"># Set to &quot;0&quot; to disable auto purge feature</div><div class="line">#autopurge.purgeInterval=1</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"># The number of milliseconds of each tick</span><br><span class="line"># 基本事件单元，以毫秒为单位。它用来指示心跳，最小的 session 过期时间为两倍的 tickTime.</span><br><span class="line">tickTime=2000</span><br><span class="line"># The number of ticks that the initial </span><br><span class="line"># synchronization phase can take</span><br><span class="line">initLimit=10</span><br><span class="line"># The number of ticks that can pass between </span><br><span class="line"># sending a request and getting an acknowledgement</span><br><span class="line">syncLimit=5</span><br><span class="line"># the directory where the snapshot is stored.</span><br><span class="line"># do not use /tmp for storage, /tmp here is just </span><br><span class="line"># example sakes.</span><br><span class="line"># 存储内存中数据库快照的位置，如果不设置参数，更新事务日志将被存储到默认位置</span><br><span class="line">dataDir=/home/yumao/zookeeper/data</span><br><span class="line">dataLogDir=/home/yumao/zookeeper/log</span><br><span class="line"># the port at which the clients will connect</span><br><span class="line"># 监听客户端连接的端口</span><br><span class="line">clientPort=2181</span><br><span class="line"># the maximum number of client connections.</span><br><span class="line"># increase this if you need to handle more clients</span><br><span class="line">#maxClientCnxns=60</span><br><span class="line">#</span><br><span class="line"># Be sure to read the maintenance section of the </span><br><span class="line"># administrator guide before turning on autopurge.</span><br><span class="line">#</span><br><span class="line"># http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance</span><br><span class="line">#</span><br><span class="line"># The number of snapshots to retain in dataDir</span><br><span class="line">#autopurge.snapRetainCount=3</span><br><span class="line"># 格式为server.id=host:port:port, 其中id为在dataDir目录下创建的myid文件中的数字, 每个机器的数字必须保证唯一, id的范围是1~255</span><br><span class="line"># 以下配置为单机配置</span><br><span class="line">server.1=127.0.0.1:2888:3888</span><br><span class="line"></span><br><span class="line"># Set to &quot;0&quot; to disable auto purge feature</span><br><span class="line">#autopurge.purgeInterval=1</span><br></pre></td></tr></table></figure>
 <h4 id="创建myid文件"><a href="#创建myid文件" class="headerlink" title="创建myid文件"></a>创建myid文件</h4><p>由于在zoo.cfg配置中指定了dataDir位置，进入dataDir=/home/yumao/zookeeper/data目录下，创建文件myid，内容为1</p>
-<h4 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">yumao@ubuntu:/opt/zookeeper-3.4.6/bin$ sudo ./zkServer.sh start</div><div class="line">JMX enabled by default</div><div class="line">Using config: /opt/zookeeper-3.4.6/bin/../conf/zoo.cfg</div><div class="line">Starting zookeeper ... STARTED</div></pre></td></tr></table></figure>
-<h4 id="停止服务"><a href="#停止服务" class="headerlink" title="停止服务"></a>停止服务</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">yumao@ubuntu:/opt/zookeeper-3.4.6/bin$ sudo ./zkServer.sh stop</div><div class="line">JMX enabled by default</div><div class="line">Using config: /opt/zookeeper-3.4.6/bin/../conf/zoo.cfg</div><div class="line">Stopping zookeeper ... STOPPED</div><div class="line">yumao@ubuntu:/opt/zookeeper-3.4.6/bin$</div></pre></td></tr></table></figure>
+<h4 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yumao@ubuntu:/opt/zookeeper-3.4.6/bin$ sudo ./zkServer.sh start</span><br><span class="line">JMX enabled by default</span><br><span class="line">Using config: /opt/zookeeper-3.4.6/bin/../conf/zoo.cfg</span><br><span class="line">Starting zookeeper ... STARTED</span><br></pre></td></tr></table></figure>
+<h4 id="停止服务"><a href="#停止服务" class="headerlink" title="停止服务"></a>停止服务</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yumao@ubuntu:/opt/zookeeper-3.4.6/bin$ sudo ./zkServer.sh stop</span><br><span class="line">JMX enabled by default</span><br><span class="line">Using config: /opt/zookeeper-3.4.6/bin/../conf/zoo.cfg</span><br><span class="line">Stopping zookeeper ... STOPPED</span><br><span class="line">yumao@ubuntu:/opt/zookeeper-3.4.6/bin$</span><br></pre></td></tr></table></figure>
 <h4 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h4><p>在/etc/profile文件中添加</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#Set ZooKeeper Enviroment</div><div class="line">export ZOOKEEPER_HOME=/opt/zookeeper-3.4.6</div><div class="line">export PATH=$PATH:$ZOOKEEPER_HOME/bin:$ZOOKEEPER_HOME/conf</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#Set ZooKeeper Enviroment</span><br><span class="line">export ZOOKEEPER_HOME=/opt/zookeeper-3.4.6</span><br><span class="line">export PATH=$PATH:$ZOOKEEPER_HOME/bin:$ZOOKEEPER_HOME/conf</span><br></pre></td></tr></table></figure>
 <hr>
-<h2 id="Zookeeper客户端的使用"><a href="#Zookeeper客户端的使用" class="headerlink" title="Zookeeper客户端的使用"></a>Zookeeper客户端的使用</h2><h3 id="客户端启动"><a href="#客户端启动" class="headerlink" title="客户端启动"></a>客户端启动</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sh zkCli.sh</div></pre></td></tr></table></figure>
+<h2 id="Zookeeper客户端的使用"><a href="#Zookeeper客户端的使用" class="headerlink" title="Zookeeper客户端的使用"></a>Zookeeper客户端的使用</h2><h3 id="客户端启动"><a href="#客户端启动" class="headerlink" title="客户端启动"></a>客户端启动</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh zkCli.sh</span><br></pre></td></tr></table></figure>
 <p>注：在执行该脚本的时候，系统报了个错</p>
 <blockquote>
 <p>zkCli.sh: 81: /opt/zookeeper-3.4.6/bin/zkEnv.sh: Syntax error: “(“ unexpected (expecting “fi”)</p>
 </blockquote>
 <p>一般出现该问题是因为没有配置Zookeeper的环境变量，但还有一个问题是ubuntu本身的配置问题导致，执行以下命令后解决。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">yumao@ubuntu:/bin$ ls -l /bin/sh</div><div class="line">lrwxrwxrwx 1 root root 4 May 17 10:34 /bin/sh -&gt; dash</div><div class="line">yumao@ubuntu:/bin$ sudo ln -sf bash /bin/sh</div><div class="line">yumao@ubuntu:/bin$ ls -l /bin/sh</div><div class="line">lrwxrwxrwx 1 root root 4 Jul 26 03:23 /bin/sh -&gt; bash</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yumao@ubuntu:/bin$ ls -l /bin/sh</span><br><span class="line">lrwxrwxrwx 1 root root 4 May 17 10:34 /bin/sh -&gt; dash</span><br><span class="line">yumao@ubuntu:/bin$ sudo ln -sf bash /bin/sh</span><br><span class="line">yumao@ubuntu:/bin$ ls -l /bin/sh</span><br><span class="line">lrwxrwxrwx 1 root root 4 Jul 26 03:23 /bin/sh -&gt; bash</span><br></pre></td></tr></table></figure>
 <p>若客户端脚本成功启动，则系统控制台输出如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">yumao@ubuntu:/opt/zookeeper-3.4.6/bin$ sudo sh ./zkServer.sh start</div><div class="line">JMX enabled by default</div><div class="line">Using config: /opt/zookeeper-3.4.6/bin/../conf/zoo.cfg</div><div class="line">Starting zookeeper ... STARTED</div><div class="line">yumao@ubuntu:/opt/zookeeper-3.4.6/bin$ sudo sh zkCli.sh </div><div class="line">Connecting to localhost:2181</div><div class="line">2016-07-26 03:29:22,781 [myid:] - INFO  [main:Environment@100] - Client environment:zookeeper.version=3.4.6-1569965, built on 02/20/2014 09:09 GMT</div><div class="line">2016-07-26 03:29:22,789 [myid:] - INFO  [main:Environment@100] - Client environment:host.name=ubuntu</div><div class="line">2016-07-26 03:29:22,790 [myid:] - INFO  [main:Environment@100] - Client environment:java.version=1.7.0_51</div><div class="line">2016-07-26 03:29:22,791 [myid:] - INFO  [main:Environment@100] - Client environment:java.vendor=Oracle Corporation</div><div class="line">2016-07-26 03:29:22,791 [myid:] - INFO  [main:Environment@100] - Client environment:java.home=/usr/jdk1.7.0_51/jre</div><div class="line">2016-07-26 03:29:22,791 [myid:] - INFO  [main:Environment@100] - Client environment:java.class.path=/opt/zookeeper-3.4.6/bin/../build/classes:/opt/zookeeper-3.4.6/bin/../build/lib/*.jar:/opt/zookeeper-3.4.6/bin/../lib/slf4j-log4j12-1.6.1.jar:/opt/zookeeper-3.4.6/bin/../lib/slf4j-api-1.6.1.jar:/opt/zookeeper-3.4.6/bin/../lib/netty-3.7.0.Final.jar:/opt/zookeeper-3.4.6/bin/../lib/log4j-1.2.16.jar:/opt/zookeeper-3.4.6/bin/../lib/jline-0.9.94.jar:/opt/zookeeper-3.4.6/bin/../zookeeper-3.4.6.jar:/opt/zookeeper-3.4.6/bin/../src/java/lib/*.jar:/opt/zookeeper-3.4.6/bin/../conf:$CLASSPATH:$JAVA_HOME/lib:$JAVA_HOME/jre/lib</div><div class="line">2016-07-26 03:29:22,791 [myid:] - INFO  [main:Environment@100] - Client environment:java.library.path=/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib</div><div class="line">2016-07-26 03:29:22,792 [myid:] - INFO  [main:Environment@100] - Client environment:java.io.tmpdir=/tmp</div><div class="line">2016-07-26 03:29:22,792 [myid:] - INFO  [main:Environment@100] - Client environment:java.compiler=&lt;NA&gt;</div><div class="line">2016-07-26 03:29:22,792 [myid:] - INFO  [main:Environment@100] - Client environment:os.name=Linux</div><div class="line">2016-07-26 03:29:22,792 [myid:] - INFO  [main:Environment@100] - Client environment:os.arch=amd64</div><div class="line">2016-07-26 03:29:22,793 [myid:] - INFO  [main:Environment@100] - Client environment:os.version=4.4.0-31-generic</div><div class="line">2016-07-26 03:29:22,793 [myid:] - INFO  [main:Environment@100] - Client environment:user.name=root</div><div class="line">2016-07-26 03:29:22,793 [myid:] - INFO  [main:Environment@100] - Client environment:user.home=/root</div><div class="line">2016-07-26 03:29:22,793 [myid:] - INFO  [main:Environment@100] - Client environment:user.dir=/opt/zookeeper-3.4.6/bin</div><div class="line">2016-07-26 03:29:22,794 [myid:] - INFO  [main:ZooKeeper@438] - Initiating client connection, connectString=localhost:2181 sessionTimeout=30000 watcher=org.apache.zookeeper.ZooKeeperMain$MyWatcher@4b4cab63</div><div class="line">Welcome to ZooKeeper!</div><div class="line">JLine support is enabled</div><div class="line">2016-07-26 03:29:22,865 [myid:] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@975] - Opening socket connection to server localhost/127.0.0.1:2181. Will not attempt to authenticate using SASL (unknown error)</div><div class="line">2016-07-26 03:29:22,887 [myid:] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@852] - Socket connection established to localhost/127.0.0.1:2181, initiating session</div><div class="line">[zk: localhost:2181(CONNECTING) 0] 2016-07-26 03:29:22,936 [myid:] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1235] - Session establishment complete on server localhost/127.0.0.1:2181, sessionid = 0x15626c0466b0000, negotiated timeout = 30000</div><div class="line"></div><div class="line">WATCHER::</div><div class="line"></div><div class="line">WatchedEvent state:SyncConnected type:None path:null</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">yumao@ubuntu:/opt/zookeeper-3.4.6/bin$ sudo sh ./zkServer.sh start</span><br><span class="line">JMX enabled by default</span><br><span class="line">Using config: /opt/zookeeper-3.4.6/bin/../conf/zoo.cfg</span><br><span class="line">Starting zookeeper ... STARTED</span><br><span class="line">yumao@ubuntu:/opt/zookeeper-3.4.6/bin$ sudo sh zkCli.sh </span><br><span class="line">Connecting to localhost:2181</span><br><span class="line">2016-07-26 03:29:22,781 [myid:] - INFO  [main:Environment@100] - Client environment:zookeeper.version=3.4.6-1569965, built on 02/20/2014 09:09 GMT</span><br><span class="line">2016-07-26 03:29:22,789 [myid:] - INFO  [main:Environment@100] - Client environment:host.name=ubuntu</span><br><span class="line">2016-07-26 03:29:22,790 [myid:] - INFO  [main:Environment@100] - Client environment:java.version=1.7.0_51</span><br><span class="line">2016-07-26 03:29:22,791 [myid:] - INFO  [main:Environment@100] - Client environment:java.vendor=Oracle Corporation</span><br><span class="line">2016-07-26 03:29:22,791 [myid:] - INFO  [main:Environment@100] - Client environment:java.home=/usr/jdk1.7.0_51/jre</span><br><span class="line">2016-07-26 03:29:22,791 [myid:] - INFO  [main:Environment@100] - Client environment:java.class.path=/opt/zookeeper-3.4.6/bin/../build/classes:/opt/zookeeper-3.4.6/bin/../build/lib/*.jar:/opt/zookeeper-3.4.6/bin/../lib/slf4j-log4j12-1.6.1.jar:/opt/zookeeper-3.4.6/bin/../lib/slf4j-api-1.6.1.jar:/opt/zookeeper-3.4.6/bin/../lib/netty-3.7.0.Final.jar:/opt/zookeeper-3.4.6/bin/../lib/log4j-1.2.16.jar:/opt/zookeeper-3.4.6/bin/../lib/jline-0.9.94.jar:/opt/zookeeper-3.4.6/bin/../zookeeper-3.4.6.jar:/opt/zookeeper-3.4.6/bin/../src/java/lib/*.jar:/opt/zookeeper-3.4.6/bin/../conf:$CLASSPATH:$JAVA_HOME/lib:$JAVA_HOME/jre/lib</span><br><span class="line">2016-07-26 03:29:22,791 [myid:] - INFO  [main:Environment@100] - Client environment:java.library.path=/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib</span><br><span class="line">2016-07-26 03:29:22,792 [myid:] - INFO  [main:Environment@100] - Client environment:java.io.tmpdir=/tmp</span><br><span class="line">2016-07-26 03:29:22,792 [myid:] - INFO  [main:Environment@100] - Client environment:java.compiler=&lt;NA&gt;</span><br><span class="line">2016-07-26 03:29:22,792 [myid:] - INFO  [main:Environment@100] - Client environment:os.name=Linux</span><br><span class="line">2016-07-26 03:29:22,792 [myid:] - INFO  [main:Environment@100] - Client environment:os.arch=amd64</span><br><span class="line">2016-07-26 03:29:22,793 [myid:] - INFO  [main:Environment@100] - Client environment:os.version=4.4.0-31-generic</span><br><span class="line">2016-07-26 03:29:22,793 [myid:] - INFO  [main:Environment@100] - Client environment:user.name=root</span><br><span class="line">2016-07-26 03:29:22,793 [myid:] - INFO  [main:Environment@100] - Client environment:user.home=/root</span><br><span class="line">2016-07-26 03:29:22,793 [myid:] - INFO  [main:Environment@100] - Client environment:user.dir=/opt/zookeeper-3.4.6/bin</span><br><span class="line">2016-07-26 03:29:22,794 [myid:] - INFO  [main:ZooKeeper@438] - Initiating client connection, connectString=localhost:2181 sessionTimeout=30000 watcher=org.apache.zookeeper.ZooKeeperMain$MyWatcher@4b4cab63</span><br><span class="line">Welcome to ZooKeeper!</span><br><span class="line">JLine support is enabled</span><br><span class="line">2016-07-26 03:29:22,865 [myid:] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@975] - Opening socket connection to server localhost/127.0.0.1:2181. Will not attempt to authenticate using SASL (unknown error)</span><br><span class="line">2016-07-26 03:29:22,887 [myid:] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@852] - Socket connection established to localhost/127.0.0.1:2181, initiating session</span><br><span class="line">[zk: localhost:2181(CONNECTING) 0] 2016-07-26 03:29:22,936 [myid:] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1235] - Session establishment complete on server localhost/127.0.0.1:2181, sessionid = 0x15626c0466b0000, negotiated timeout = 30000</span><br><span class="line"></span><br><span class="line">WATCHER::</span><br><span class="line"></span><br><span class="line">WatchedEvent state:SyncConnected type:None path:null</span><br></pre></td></tr></table></figure>
 <p>若想以指定Zookeeper地址启动，则命令应输入</p>
 <blockquote>
 <p>sh zkCli.sh -server ip:port</p>
@@ -186,236 +189,417 @@ var themeMenus = {};
 </blockquote>
 <p>其中 -s或-e分别指节点的特性，-s代表顺序节点，-e则代表临时节点。若不添加-e或-s参数，默认创建持久节点。</p>
 <p>acl表示用来进行权限控制。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">WatchedEvent state:SyncConnected type:None path:null</div><div class="line">create /test_root test_data</div><div class="line">Created /test_root</div><div class="line">[zk: localhost:2181(CONNECTED) 1]</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">WatchedEvent state:SyncConnected type:None path:null</span><br><span class="line">create /test_root test_data</span><br><span class="line">Created /test_root</span><br><span class="line">[zk: localhost:2181(CONNECTED) 1]</span><br></pre></td></tr></table></figure>
 <h3 id="读取Zookeeper节点"><a href="#读取Zookeeper节点" class="headerlink" title="读取Zookeeper节点"></a>读取Zookeeper节点</h3><h4 id="ls命令"><a href="#ls命令" class="headerlink" title="ls命令"></a>ls命令</h4><p>列出指定节点下的所有子节点。只能看到指定节点下的第一级的所有子节点。</p>
 <blockquote>
 <p>ls path [watch]</p>
 </blockquote>
 <p>case：在根节点下创建了/test_root持久节点后，使用ls命令查看根节点。然后再/test_root节点下创建了新的持久子节点1，再次使用ls命令查看根节点，结果无变化。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">WatchedEvent state:SyncConnected type:None path:null</div><div class="line">create /test_root test_data</div><div class="line">Created /test_root</div><div class="line">[zk: localhost:2181(CONNECTED) 1] ls /</div><div class="line">[test_root, dubbo, zookeeper]</div><div class="line">[zk: localhost:2181(CONNECTED) 2] create /test_root/1 test_data_1</div><div class="line">Created /test_root/1</div><div class="line">[zk: localhost:2181(CONNECTED) 3] ls /</div><div class="line">[test_root, dubbo, zookeeper]</div><div class="line">[zk: localhost:2181(CONNECTED) 4] ls /test_root</div><div class="line">[1]</div><div class="line">[zk: localhost:2181(CONNECTED) 5]</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">WatchedEvent state:SyncConnected type:None path:null</span><br><span class="line">create /test_root test_data</span><br><span class="line">Created /test_root</span><br><span class="line">[zk: localhost:2181(CONNECTED) 1] ls /</span><br><span class="line">[test_root, dubbo, zookeeper]</span><br><span class="line">[zk: localhost:2181(CONNECTED) 2] create /test_root/1 test_data_1</span><br><span class="line">Created /test_root/1</span><br><span class="line">[zk: localhost:2181(CONNECTED) 3] ls /</span><br><span class="line">[test_root, dubbo, zookeeper]</span><br><span class="line">[zk: localhost:2181(CONNECTED) 4] ls /test_root</span><br><span class="line">[1]</span><br><span class="line">[zk: localhost:2181(CONNECTED) 5]</span><br></pre></td></tr></table></figure>
 <h4 id="get命令"><a href="#get命令" class="headerlink" title="get命令"></a>get命令</h4><p>获取指定节点数据内容和属性信息</p>
 <blockquote>
 <p>get path [watch]</p>
 </blockquote>
 <p>case：使用get命令查看根节点test_root</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">[zk: localhost:2181(CONNECTED) 5] get /test_root</div><div class="line">test_data</div><div class="line">cZxid = 0xbf</div><div class="line">ctime = Tue Jul 26 03:35:51 PDT 2016</div><div class="line">mZxid = 0xbf</div><div class="line">mtime = Tue Jul 26 03:35:51 PDT 2016</div><div class="line">pZxid = 0xc0</div><div class="line">cversion = 1</div><div class="line">dataVersion = 0</div><div class="line">aclVersion = 0</div><div class="line">ephemeralOwner = 0x0</div><div class="line">dataLength = 9</div><div class="line">numChildren = 1</div><div class="line">[zk: localhost:2181(CONNECTED) 6]</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 5] get /test_root</span><br><span class="line">test_data</span><br><span class="line">cZxid = 0xbf</span><br><span class="line">ctime = Tue Jul 26 03:35:51 PDT 2016</span><br><span class="line">mZxid = 0xbf</span><br><span class="line">mtime = Tue Jul 26 03:35:51 PDT 2016</span><br><span class="line">pZxid = 0xc0</span><br><span class="line">cversion = 1</span><br><span class="line">dataVersion = 0</span><br><span class="line">aclVersion = 0</span><br><span class="line">ephemeralOwner = 0x0</span><br><span class="line">dataLength = 9</span><br><span class="line">numChildren = 1</span><br><span class="line">[zk: localhost:2181(CONNECTED) 6]</span><br></pre></td></tr></table></figure>
 <h3 id="更新Zookeeper节点"><a href="#更新Zookeeper节点" class="headerlink" title="更新Zookeeper节点"></a>更新Zookeeper节点</h3><h4 id="set命令"><a href="#set命令" class="headerlink" title="set命令"></a>set命令</h4><blockquote>
 <p>set path data [version]</p>
 </blockquote>
 <p>case: 将/test_root节点的值更新为luffy，注意更新后节点version的变化</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">[zk: localhost:2181(CONNECTED) 3] get /test_root</div><div class="line">test_data</div><div class="line">cZxid = 0xbf</div><div class="line">ctime = Tue Jul 26 03:35:51 PDT 2016</div><div class="line">mZxid = 0xbf</div><div class="line">mtime = Tue Jul 26 03:35:51 PDT 2016</div><div class="line">pZxid = 0xc0</div><div class="line">cversion = 1</div><div class="line">dataVersion = 0</div><div class="line">aclVersion = 0</div><div class="line">ephemeralOwner = 0x0</div><div class="line">dataLength = 9</div><div class="line">numChildren = 1</div><div class="line">[zk: localhost:2181(CONNECTED) 4] set /test_root luffy</div><div class="line">cZxid = 0xbf</div><div class="line">ctime = Tue Jul 26 03:35:51 PDT 2016</div><div class="line">mZxid = 0xc3</div><div class="line">mtime = Tue Jul 26 19:24:32 PDT 2016</div><div class="line">pZxid = 0xc0</div><div class="line">cversion = 1</div><div class="line">dataVersion = 1</div><div class="line">aclVersion = 0</div><div class="line">ephemeralOwner = 0x0</div><div class="line">dataLength = 5</div><div class="line">numChildren = 1</div><div class="line">[zk: localhost:2181(CONNECTED) 5]</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 3] get /test_root</span><br><span class="line">test_data</span><br><span class="line">cZxid = 0xbf</span><br><span class="line">ctime = Tue Jul 26 03:35:51 PDT 2016</span><br><span class="line">mZxid = 0xbf</span><br><span class="line">mtime = Tue Jul 26 03:35:51 PDT 2016</span><br><span class="line">pZxid = 0xc0</span><br><span class="line">cversion = 1</span><br><span class="line">dataVersion = 0</span><br><span class="line">aclVersion = 0</span><br><span class="line">ephemeralOwner = 0x0</span><br><span class="line">dataLength = 9</span><br><span class="line">numChildren = 1</span><br><span class="line">[zk: localhost:2181(CONNECTED) 4] set /test_root luffy</span><br><span class="line">cZxid = 0xbf</span><br><span class="line">ctime = Tue Jul 26 03:35:51 PDT 2016</span><br><span class="line">mZxid = 0xc3</span><br><span class="line">mtime = Tue Jul 26 19:24:32 PDT 2016</span><br><span class="line">pZxid = 0xc0</span><br><span class="line">cversion = 1</span><br><span class="line">dataVersion = 1</span><br><span class="line">aclVersion = 0</span><br><span class="line">ephemeralOwner = 0x0</span><br><span class="line">dataLength = 5</span><br><span class="line">numChildren = 1</span><br><span class="line">[zk: localhost:2181(CONNECTED) 5]</span><br></pre></td></tr></table></figure>
 <h3 id="删除Zookeeper节点"><a href="#删除Zookeeper节点" class="headerlink" title="删除Zookeeper节点"></a>删除Zookeeper节点</h3><h4 id="delete-命令"><a href="#delete-命令" class="headerlink" title="delete 命令"></a>delete 命令</h4><blockquote>
 <p>delete path [version]<br>注意，只能删除叶子节点。</p>
 </blockquote>
 <p>case: 将/test_root下的1节点删除。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[zk: localhost:2181(CONNECTED) 5] ls /test_root</div><div class="line">[1]</div><div class="line">[zk: localhost:2181(CONNECTED) 6] delete /test_root/1</div><div class="line">[zk: localhost:2181(CONNECTED) 7] ls /test_root      </div><div class="line">[]</div><div class="line">[zk: localhost:2181(CONNECTED) 8]</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 5] ls /test_root</span><br><span class="line">[1]</span><br><span class="line">[zk: localhost:2181(CONNECTED) 6] delete /test_root/1</span><br><span class="line">[zk: localhost:2181(CONNECTED) 7] ls /test_root      </span><br><span class="line">[]</span><br><span class="line">[zk: localhost:2181(CONNECTED) 8]</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/blog/categories/Zookeeper/">Zookeeper</a>
+        </div>
 
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Zookeeper-zkCli-sh-zkServer-sh/">Zookeeper zkCli.sh zkServer.sh</a></li></ul>
-
-      
         
-	<div id="comment">
-	
-	<!-- 多说评论框 start -->
-	 <div class="ds-thread" data-thread-key="/blog/2016/07/23/zookeeper_deploy_and_client_using/" data-title="Zookeeper的安装部署与客户端使用" data-url="http://wangran.me/blog/blog/2016/07/23/zookeeper_deploy_and_client_using/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"wr4javaee"};
-	  (function() {
-	    var ds = document.createElement('script');
-	    ds.type = 'text/javascript';ds.async = true;
-	    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-	    ds.charset = 'UTF-8';
-	    (document.getElementsByTagName('head')[0] 
-	     || document.getElementsByTagName('body')[0]).appendChild(ds);
-	  })();
-	  </script>
-	<!-- 多说公共JS代码 end -->
-	
-	</div>
-	<link rel="stylesheet" href="/blog/css/comment.css">
-
-
-      
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/blog/2016/07/26/zookeeper_java_api/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">
+            <div class="article-tags tags">
+                
+                    <a href="/tags/Zookeeper/"><i class="fa fa-tag fa-fw" aria-hidden="true"></i>&nbsp;Zookeeper</a>
+                
+            </div>
         
-          Zookeeper Java API的使用
-        
-      </div>
-    </a>
-  
-  
-    <a href="/blog/2016/07/18/zookeeper-02/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">Zookeeper学习笔记二</div>
-    </a>
-  
-</nav>
 
-  
+        
+            <div class="prev-next">
+                
+                    <section class="prev" >
+                        <span class="art-item-left">
+                            <h6><i class="fa fa-chevron-left" aria-hidden="true"></i>&nbsp;上一篇</h6>
+                            <h4>
+                                <a href="/2016/07/26/zookeeper_java_api/" rel="prev" title="Zookeeper Java API的使用">
+                                  
+                                      Zookeeper Java API的使用
+                                  
+                                </a>
+                            </h4>
+                            
+                                <h6 class="tags">
+                                    
+                                        <i class="fa fa-tag fa-fw"></i>Zookeeper
+                                    
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>下一篇&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/2016/07/18/zookeeper_summary/" rel="prev" title="Zookeeper学习笔记二">
+                                    
+                                        Zookeeper学习笔记二
+                                    
+                                </a>
+                            </h4>
+                            
+                                <h6 class="tags">
+                                    
+                                        <i class="fa fa-tag fa-fw"></i>Zookeeper
+                                    
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+
+    </section>
+
 </article>
 
-<!-- Table of Contents -->
+<br>
 
-  <aside id="sidebar">
-    <div id="toc" class="toc-article">
-    <strong class="toc-title">文章目录</strong>
-    
-      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Zookeeper的安装与部署"><span class="nav-number">1.</span> <span class="nav-text">Zookeeper的安装与部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载"><span class="nav-number">1.1.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">1.2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">1.3.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建zoo-cfg文件"><span class="nav-number">1.3.1.</span> <span class="nav-text">创建zoo.cfg文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建myid文件"><span class="nav-number">1.3.2.</span> <span class="nav-text">创建myid文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动服务"><span class="nav-number">1.3.3.</span> <span class="nav-text">启动服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#停止服务"><span class="nav-number">1.3.4.</span> <span class="nav-text">停止服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置环境变量"><span class="nav-number">1.3.5.</span> <span class="nav-text">设置环境变量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Zookeeper客户端的使用"><span class="nav-number">2.</span> <span class="nav-text">Zookeeper客户端的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端启动"><span class="nav-number">2.1.</span> <span class="nav-text">客户端启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过客户端创建一个Zookeeper节点"><span class="nav-number">2.2.</span> <span class="nav-text">通过客户端创建一个Zookeeper节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取Zookeeper节点"><span class="nav-number">2.3.</span> <span class="nav-text">读取Zookeeper节点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ls命令"><span class="nav-number">2.3.1.</span> <span class="nav-text">ls命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#get命令"><span class="nav-number">2.3.2.</span> <span class="nav-text">get命令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新Zookeeper节点"><span class="nav-number">2.4.</span> <span class="nav-text">更新Zookeeper节点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#set命令"><span class="nav-number">2.4.1.</span> <span class="nav-text">set命令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除Zookeeper节点"><span class="nav-number">2.5.</span> <span class="nav-text">删除Zookeeper节点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#delete-命令"><span class="nav-number">2.5.1.</span> <span class="nav-text">delete 命令</span></a></li></ol></li></ol></li></ol>
-    
+<!-- 显示推荐文章和评论 -->
+
+    <article class="post white-box comments">
+        <section class="article typo">
+
+            
+                
+
+    <div class="recommended_posts">
+        <h4><i class="fa fa-bookmark fa-fw" aria-hidden="true"></i>&nbsp;你可能感兴趣的文章</h4>
+        <ul>
+            
+                <li><a href="https://wangran.me/2016/07/27/zookeeper_curator/">Zookeeper Curator的使用</a></li>
+            
+                <li><a href="https://wangran.me/2016/07/26/zookeeper_java_api/">Zookeeper Java API的使用</a></li>
+            
+                <li><a href="https://wangran.me/2016/07/18/zookeeper_summary/">Zookeeper学习笔记二</a></li>
+            
+                <li><a href="https://wangran.me/2016/07/10/zookeeper_paxos/">Zookeeper学习笔记一之Paxos算法</a></li>
+            
+                <li><a href="https://wangran.me/2016/07/03/tcp_connection/">TCP长连接与短连接的区别</a></li>
+            
+        </ul>
     </div>
-  </aside>
-
-</section>
-        
-      </div>
-      <footer id="footer" class="site-footer">
-  
-
-  <div class="clearfix container">
-      <div class="site-info">
-	      &copy; 2017 羽毛的博客 STAY REAL! All Rights Reserved.
-          
-            <span id="busuanzi_container_site_uv">
-              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
-              本站总访问量<span id="busuanzi_value_site_pv"></span>次
-            </span>
-          
-      </div>
-      <div class="site-credit">
-        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
-      </div>
-  </div>
-</footer>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
 
 
-<!-- min height -->
+            
+
+            
+
+                
+
+                
+                    <h4><i class="fa fa-comments fa-fw" aria-hidden="true"></i>&nbsp;LiveRe评论</h4>
+                    <section id="comments">
+                        <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTU4Ny82MTU1">
+                            <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+                        </div>
+                    </section>
+                
+
+                
+            
+
+        </section>
+    </article>
+
 
 <script>
-    var contentdiv = document.getElementById("content");
-
-    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    window.subData = {
+        title: 'Zookeeper的安装部署与客户端使用',
+        tools: true
+    }
 </script>
+
+
+        </div>
+        <aside class='l_side'>
+            
+    
+        
+    <section class='m_widget author'>
+        
+            <div class='header'>
+                <img class='avatar' src='https://wangran.me/images/yumao.jpg' />
+            </div>
+        
+        <div class='content'>
+            
+                <h2>STAY REAL!</h2>
+            
+            
+                <div>
+                    <i class="fa fa-quote-left fa-3x fa-pull-left" aria-hidden="true"></i>
+                    人生无限公司员工
+                </div>
+            
+        </div>
+        
+            <div class="social-wrapper">
+              
+                
+                    <a href="mailto:wr4javaee@126.com" class="social flat-box" target="_blank" rel="external"><i class="social fa fa-envelope" aria-hidden="true"></i></a>
+                
+              
+                
+                    <a href="https://github.com/wr4javaee" class="social flat-box" target="_blank" rel="external"><i class="social fa fa-github" aria-hidden="true"></i></a>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                    <a href="https://music.163.com/#/user/home?id=102135502" class="social flat-box" target="_blank" rel="external"><i class="social fa fa-music" aria-hidden="true"></i></a>
+                
+              
+                
+                    <a href="atom" class="social flat-box" target="_blank" rel="external"><i class="social fa fa-rss" aria-hidden="true"></i></a>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            </div>
+        
+    </section>
+
+
+    
+    
+        <section class='m_widget categories'>
+    <div class='header'><i class="fa fa-sitemap fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;分类</div>
+    <div class='content'>
+        
+            <ul class="entry">
+                
+                    <li><a class="flat-box" href="/categories/Database/"><div class='name'>Database</div><div class='badge'>1</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/Github/"><div class='name'>Github</div><div class='badge'>1</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/Spring-Cloud/"><div class='name'>Spring Cloud</div><div class='badge'>1</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/TCP/"><div class='name'>TCP</div><div class='badge'>1</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/Zookeeper/"><div class='name'>Zookeeper</div><div class='badge'>5</div></a></li>
+                
+            </ul>
+        
     </div>
-    <!-- <nav id="mobile-nav">
-  
-    <a href="/blog/blog" class="mobile-nav-link">Home</a>
-  
-    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
-  
-    <a href="/blog/categories" class="mobile-nav-link">Categories</a>
-  
-    <a href="/blog/tags" class="mobile-nav-link">Tags</a>
-  
-    <a href="/blog/about" class="mobile-nav-link">About</a>
-  
-</nav> -->
+</section>
+
+    
+    
+        
+    <section class='m_widget tagcloud'>
+        <div class="header"><i class="fa fa-tags fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;标签</div>
+        <div class='content'>
+            <a href="/tags/Github/" style="font-size: 14px; color: #999">Github</a> <a href="/tags/TCP/" style="font-size: 14px; color: #999">TCP</a> <a href="/tags/Zookeeper/" style="font-size: 24px; color: #555">Zookeeper</a> <a href="/tags/Zuul/" style="font-size: 14px; color: #999">Zuul</a> <a href="/tags/数据库/" style="font-size: 14px; color: #999">数据库</a>
+        </div>
+    </section>
+
+
+    
+    
+        <section class='m_widget music'>
+    <div class='header'><i class="fa fa-headphones fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;音乐</div>
+    <div class='content'>
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=100% height=450 src="//music.163.com/outchain/player?type=0&id=2404670714&auto=0&height=450"></iframe>
+    </div>
+</section>
+
+    
+    
+        <section class='m_widget links'>
+    <div class='header'><i class="fa fa-thumbs-up fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;友链</div>
+    <div class='content'>
+        <ul class="entry" id="links">
+            
+                <li><a class="flat-box" target="_blank" rel="external nofollow noopener noreferrer" href="https://wangran.me">
+                    <div class='name'>
+                        <i class="fa fa-user-circle-o fa-fw" aria-hidden="true"></i>
+                        &nbsp;&nbsp;wr4javaee
+                    </div>
+                </a></li>
+            
+            <li><a class="flat-box" target="_blank" rel="external nofollow noopener noreferrer" href="mailto:?subject=交换友链">
+                <div class='name'>
+                    <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
+                    &nbsp;&nbsp;联系博主交换友链
+                </div>
+            </a></li>
+        </ul>
+
+    </div>
+</section>
+
+    
+    
+        
+    <section class='m_widget toc-wrapper'>
+        <div class="header"><i class="fa fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;目录</div>
+        <div class='content'>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Zookeeper的安装与部署"><span class="toc-text">Zookeeper的安装与部署</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#下载"><span class="toc-text">下载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置"><span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建zoo-cfg文件"><span class="toc-text">创建zoo.cfg文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建myid文件"><span class="toc-text">创建myid文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#启动服务"><span class="toc-text">启动服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#停止服务"><span class="toc-text">停止服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#设置环境变量"><span class="toc-text">设置环境变量</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Zookeeper客户端的使用"><span class="toc-text">Zookeeper客户端的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#客户端启动"><span class="toc-text">客户端启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#通过客户端创建一个Zookeeper节点"><span class="toc-text">通过客户端创建一个Zookeeper节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#读取Zookeeper节点"><span class="toc-text">读取Zookeeper节点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ls命令"><span class="toc-text">ls命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#get命令"><span class="toc-text">get命令</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更新Zookeeper节点"><span class="toc-text">更新Zookeeper节点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#set命令"><span class="toc-text">set命令</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除Zookeeper节点"><span class="toc-text">删除Zookeeper节点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#delete-命令"><span class="toc-text">delete 命令</span></a></li></ol></li></ol></li></ol>
+        </div>
+    </section>
+
+
     
 
-<!-- mathjax config similar to math.stackexchange -->
 
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
-    }
-  });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-
-  <link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
-  <script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/blog/js/script.js"></script>
-<script src="/blog/js/bootstrap.js"></script>
-<script src="/blog/js/main.js"></script>
-
-
-<!-- Google Analytics -->
-<script type="text/javascript">
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-80991226-1', 'auto');
-ga('send', 'pageview');
-
-</script>
-<!-- End Google Analytics -->
-
-
-
-
-
-
-  <div style="display: none;">
-    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
-  </div>
-
-
-
-	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-	</script>
+        </aside>
+        <script>setLoadingBarProgress(60);</script>
+    </div>
+    </div>
+    <footer id="footer" class="clearfix">
+    
+        <div class="social-wrapper">
+          
+              
+                  <a href="mailto:wr4javaee@126.com" class="social fa fa-envelope flat-box" target="_blank" rel="external"></a>
+              
+          
+              
+                  <a href="https://github.com/wr4javaee" class="social fa fa-github flat-box" target="_blank" rel="external"></a>
+              
+          
+              
+          
+              
+          
+              
+          
+              
+                  <a href="https://music.163.com/#/user/home?id=102135502" class="social fa fa-music flat-box" target="_blank" rel="external"></a>
+              
+          
+              
+                  <a href="atom" class="social fa fa-rss flat-box" target="_blank" rel="external"></a>
+              
+          
+              
+          
+              
+          
+              
+          
+              
+          
+              
+          
+              
+          
+              
+          
+              
+          
+              
+          
+              
+          
+              
+          
+              
+          
+        </div>
+    
+    <br>
+    <div>博客内容遵循 <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="licenses">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></div>
+    <div>本站使用 <a href="https://github.com/xaoxuu/hexo-theme-material-x" target="_blank" class="codename">Material X</a> 作为主题，
+		总访问量为 <span id="busuanzi_value_site_pv"><i class="fa fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span> 次。
+    </div>
+</footer>
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
 
 
-
-	<script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?b2565d31550c78e030ced325d605abaa";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
+    <script>setLoadingBarProgress(80);</script>
+    <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src='//cdn.bootcss.com/node-waves/0.7.5/waves.min.js'></script>
+<script src="//cdn.bootcss.com/scrollReveal.js/3.3.2/scrollreveal.min.js"></script>
+<!-- 访问统计 -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
+<script src="/js/jquery.fitvids.js"></script>
+
+    <script>
+        var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+        var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+        var ALGOLIA_API_KEY = "";
+        var ALGOLIA_APP_ID = "";
+        var ALGOLIA_INDEX_NAME = "";
+        var AZURE_SERVICE_NAME = "";
+        var AZURE_INDEX_NAME = "";
+        var AZURE_QUERY_KEY = "";
+        var BAIDU_API_ID = "";
+        var SEARCH_SERVICE = "hexo" || "hexo";
+        var ROOT = "/"||"/";
+        if(!ROOT.endsWith('/'))ROOT += '/';
+    </script>
+
+<script src="/js/search.js"></script>
+<script src="/js/app.js"></script>
 
 
-  </div>
+    
+    
+        <script type="text/javascript">
+           (function(d, s) {
+               var j, e = d.getElementsByTagName(s)[0];
+               if (typeof LivereTower === 'function') { return; }
+               j = d.createElement(s);
+               j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+               j.async = true;
+               e.parentNode.insertBefore(j, e);
+           })(document, 'script');
+        </script>
+    
+    
 
-  <a id="rocket" href="#top" class=""></a>
-  <script type="text/javascript" src="/js/totop.js" async=""></script>
+
+    <script>setLoadingBarProgress(100);</script>
 </body>
-</html>
