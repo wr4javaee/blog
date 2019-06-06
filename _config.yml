@@ -105,7 +105,7 @@ widgets:
   # 博主信息，显示个人头像、格言、社交信息等
   author:
     enable: true
-    avatar: https://wangran.me/images/yumao.jpg # 头像，如果config中已经设置avatar了，这里可以不用写
+    avatar: https://cdn.jsdelivr.net/gh/wr4javaee/assets@master/blog/avatar/yumao_default.jpeg
     title: STAY REAL! # 博客名、头衔等等，居中显示
     motto: 人生无限公司员工 # 格言座右铭等等
     social: true # 是否显示社交信息（内容同页脚的社交信息）
@@ -197,6 +197,10 @@ search:
 less:
   compress: true
 
-# 来必力
-livere_shortname: aa2e9d12310b809a5dac2954
+gitalk:
+  clientID: c089eb6c0d5ce0caaceb
+  clientSecret: c1ccc27515e4aa97ea76988662bbfd9c61640cbd
+  repo: wr4javaee.github.io
+  owner: wr4javaee
+  admin: [wr4javaee]
 # >> 主题配置 ---------------------------------------------------------------------
